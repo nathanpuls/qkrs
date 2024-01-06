@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>magic</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    form {
+      display: flex;
+      align-items: center;
+    }
+    #inputField {
+      padding: 10px;
+      font-size: 16px;
+      width: 200px;
+    }
+    #submitButton {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-left: 5px;
+      border: none;
+      background-color: #3498db;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <form id="redirectForm">
+    <input type="text" id="inputField" placeholder="site code + keyword" autofocus>
+    <button type="submit" id="submitButton">Magic</button>
+  </form>
+
+  <script>
+    document.getElementById('redirectForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const inputValue = document.getElementById('inputField').value.trim();
+      if (inputValue.length > 0) {
+        const firstLetter = inputValue.charAt(0).trim();
+        const remainingLetters = inputValue.slice(1).trim();
+        window.location.href = `https://${firstLetter}.qk.rs/${remainingLetters}`;
+      }
+    });
+  </script>
+</body>
+</html>
