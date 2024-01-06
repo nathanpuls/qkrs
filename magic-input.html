@@ -24,7 +24,7 @@
     #inputField {
       padding: 10px;
       font-size: 16px;
-      width: 200px;
+      width: 250px;
       border-radius: 5px 0 0 5px;
       border: 1px solid #ccc;
     }
@@ -49,7 +49,7 @@
   <h1>Magic</h1>
   
   <form id="redirectForm">
-    <input type="text" id="inputField" placeholder="site code / keyword" autofocus>
+    <input type="text" id="inputField" placeholder="Site Code [SPACE] Keyword" autofocus>
     <button type="submit" id="submitButton">GO</button>
   </form>
   <br>
@@ -60,7 +60,7 @@
       event.preventDefault();
       const inputValue = document.getElementById('inputField').value.trim();
       if (inputValue.length > 0) {
-        const delimiterIndex = inputValue.indexOf('/');
+        const delimiterIndex = inputValue.indexOf(' ');
         if (delimiterIndex !== -1) {
           const siteCode = inputValue.slice(0, delimiterIndex).trim();
           const remainingLetters = inputValue.slice(delimiterIndex + 1).trim();
@@ -72,5 +72,6 @@
       }
     });
   </script>
+
 </body>
 </html>
