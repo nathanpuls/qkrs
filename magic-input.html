@@ -53,6 +53,8 @@
     <button type="submit" id="submitButton">GO</button>
   </form>
   <br>
+  <button type="button" id="copyButton" style="display: none;">Copy URL</button>
+  <br>
   <a href="https://docs.google.com/spreadsheets/d/1A5oU3WMTWRg8tS2VtJeSmTr7E0tmhfRgUszl9HudCs0/edit">Site Code List</a>
 
   <script>
@@ -71,6 +73,53 @@
         }
       }
     });
+
+    //copy URL btn
+    const inputField = document.getElementById('inputField');
+const copyButton = document.getElementById('copyButton');
+
+inputField.addEventListener('input', function() {
+  const inputValue = inputField.value.trim();
+  const delimiterIndex = inputValue.indexOf(' ');
+  
+  if (delimiterIndex !== -1) {
+    const siteCode = inputValue.slice(0, delimiterIndex).trim();
+    const remainingLetters = inputValue.slice(delimiterIndex + 1).trim();
+    
+    if (remainingLetters.length > 0) {
+      copyButton.style.display = 'block';
+    } else {
+      copyButton.style.display = 'none';
+    }
+  } else {
+    copyButton.style.display = 'none';
+  }
+});
+
+copyButton.addEventListener('click', function() {
+  const inputValue = inputField.value.trim();
+  const delimiterIndex = inputValue.indexOf(' ');
+  
+  if (delimiterIndex !== -1) {
+    const siteCode = inputValue.slice(0, delimiterIndex).trim();
+    const remainingLetters = inputValue.slice(delimiterIndex + 1).trim();
+    
+    if (remainingLetters.length > 0) {
+      const url = `https://${siteCode}.qk.rs/${remainingLetters}`;
+      
+   // Copying URL to clipboard
+      navigator.clipboard.writeText(url).then(() => {
+        copyButton.textContent = 'Copied!';
+        setTimeout(function() {
+          copyButton.textContent = 'Copy URL';
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy:', err);
+      });
+    }
+  }
+});
+
   </script>
 
 </body>
