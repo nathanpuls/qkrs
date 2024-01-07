@@ -99,19 +99,22 @@ console.log(redirectLink);
         } else {
           console.error("Invalid or missing site parameter");
           // Redirect to a default page or display an error message
-          window.location.href = 'https://nathanpuls.com/404';
+          window.location.href = 'https://qk.rs/404';
         }
       })
       .catch(error => console.error('Error fetching data:', error));
   }
 
-window.onload = redirectBasedOnParams;
-
-  // Check if the page was loaded from cache and redirect to qk.rs if necessary
-if (performance.getEntriesByType("navigation")[0].type === "back_forward") {
-  // Redirect to qk.rs if the user navigated back
-  window.location.href = 'https://qk.rs';
-}
+window.onload = function () {
+    // Check if the page was loaded from cache and redirect to qk.rs if necessary
+    if (performance.getEntriesByType("navigation")[0].type === "back_forward") {
+      // Redirect to qk.rs if the user navigated back
+      window.location.href = 'https://qk.rs';
+    } else {
+      // Execute your existing logic if the page wasn't loaded from cache
+      redirectBasedOnParams();
+    }
+  };
 
   
 </script>
