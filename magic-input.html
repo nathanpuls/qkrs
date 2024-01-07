@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>magic</title>
+  <title>Magic</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
@@ -36,6 +36,17 @@
       color: white;
       border-radius: 0 5px 5px 0;
       cursor: pointer;
+      opacity: 0.3;
+    }
+    #copyButton {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: white;
+      color: #3498db;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+      opacity: 0;
     }
     a {
       text-decoration: none;
@@ -53,74 +64,83 @@
     <button type="submit" id="submitButton">GO</button>
   </form>
   <br>
-  <button type="button" id="copyButton" style="display: none;">Copy URL</button>
+  <button type="button" id="copyButton">Copy URL</button>
   <br>
   <a href="https://docs.google.com/spreadsheets/d/1A5oU3WMTWRg8tS2VtJeSmTr7E0tmhfRgUszl9HudCs0/edit">Site Code List</a>
 
   <script>
-    document.getElementById('redirectForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-      const inputValue = document.getElementById('inputField').value.trim();
-      if (inputValue.length > 0) {
+    document.addEventListener('DOMContentLoaded', function() {
+      const inputField = document.getElementById('inputField');
+      const goButton = document.getElementById('submitButton');
+      const copyButton = document.getElementById('copyButton');
+
+      inputField.addEventListener('input', function() {
+        const inputValue = inputField.value.trim();
         const delimiterIndex = inputValue.indexOf(' ');
+
+        if (delimiterIndex !== -1) {
+          const remainingLetters = inputValue.slice(delimiterIndex + 1).trim();
+
+          if (remainingLetters.length > 0) {
+            goButton.style.opacity = '1';
+            copyButton.style.opacity = '1'; // Show the copy button
+          } else {
+            goButton.style.opacity = '0.3';
+            copyButton.style.opacity = '0'; // Hide the copy button
+          }
+        } else {
+          goButton.style.opacity = '0.3';
+          copyButton.style.opacity = '0'; // Hide the copy button
+        }
+      });
+
+      document.getElementById('redirectForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const inputValue = inputField.value.trim();
+
+        if (inputValue.length > 0) {
+          const delimiterIndex = inputValue.indexOf(' ');
+
+          if (delimiterIndex !== -1) {
+            const siteCode = inputValue.slice(0, delimiterIndex).trim();
+            const remainingLetters = inputValue.slice(delimiterIndex + 1).trim();
+
+            if (siteCode.length > 0 && remainingLetters.length > 0) {
+              window.location.href = `https://${siteCode}.qk.rs/${remainingLetters}`;
+            } else {
+              // Handle case where either site code or remaining letters are empty
+            }
+          } else {
+            // Handle case where delimiter is not found
+          }
+        }
+      });
+
+      copyButton.addEventListener('click', function() {
+        const inputValue = inputField.value.trim();
+        const delimiterIndex = inputValue.indexOf(' ');
+
         if (delimiterIndex !== -1) {
           const siteCode = inputValue.slice(0, delimiterIndex).trim();
           const remainingLetters = inputValue.slice(delimiterIndex + 1).trim();
-          window.location.href = `https://${siteCode}.qk.rs/${remainingLetters}`;
-        } else {
-          // Handle case where delimiter is not found
-          // Maybe display an error message or handle differently
+
+          if (remainingLetters.length > 0) {
+            const url = `https://${siteCode}.qk.rs/${remainingLetters}`;
+            
+
+            // Copying URL to clipboard
+            navigator.clipboard.writeText(url).then(() => {
+              copyButton.textContent = 'Copied!';
+              setTimeout(function() {
+                copyButton.textContent = 'Copy URL';
+              }, 2000);
+            }).catch(err => {
+              console.error('Failed to copy:', err);
+            });
+          }
         }
-      }
-    });
-
-    //copy URL btn
-    const inputField = document.getElementById('inputField');
-const copyButton = document.getElementById('copyButton');
-
-inputField.addEventListener('input', function() {
-  const inputValue = inputField.value.trim();
-  const delimiterIndex = inputValue.indexOf(' ');
-  
-  if (delimiterIndex !== -1) {
-    const siteCode = inputValue.slice(0, delimiterIndex).trim();
-    const remainingLetters = inputValue.slice(delimiterIndex + 1).trim();
-    
-    if (remainingLetters.length > 0) {
-      copyButton.style.display = 'block';
-    } else {
-      copyButton.style.display = 'none';
-    }
-  } else {
-    copyButton.style.display = 'none';
-  }
-});
-
-copyButton.addEventListener('click', function() {
-  const inputValue = inputField.value.trim();
-  const delimiterIndex = inputValue.indexOf(' ');
-  
-  if (delimiterIndex !== -1) {
-    const siteCode = inputValue.slice(0, delimiterIndex).trim();
-    const remainingLetters = inputValue.slice(delimiterIndex + 1).trim();
-    
-    if (remainingLetters.length > 0) {
-      const url = `https://${siteCode}.qk.rs/${remainingLetters}`;
-      
-   // Copying URL to clipboard
-      navigator.clipboard.writeText(url).then(() => {
-        copyButton.textContent = 'Copied!';
-        setTimeout(function() {
-          copyButton.textContent = 'Copy URL';
-        }, 2000);
-      }).catch(err => {
-        console.error('Failed to copy:', err);
       });
-    }
-  }
-});
-
+    });
   </script>
-
 </body>
 </html>
