@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>qk.rs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Google Poppins', sans-serif;
+      flex-direction: column;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    form {
+      display: flex;
+      align-items: center;
+    }
+    #inputField {
+      padding: 10px;
+      font-size: 16px;
+      width: 250px;
+      border-radius: 5px 0 0 5px;
+      border: 1px solid #ccc;
+    }
+    #submitButton {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: #fbcc5c;
+      color: black;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+      opacity: 0.3;
+      margin-left: 5px;
+    }
+    .qButton {
+      text-decoration: none;
+      background-color: rgba(251, 204, 92, 0.7);
+      color: black;
+      display: block;
+opacity: 0;
+       padding: 2px 10px; /* Adjusted padding */
+      font-size: 14px; /* Reduced font size */
+      height: 25px;
+      border-radius: 5px;
+    }
+    
+    a {
+      text-decoration: underline;
+      background-color: none; /*rgba(251, 204, 92, 0.7);*/
+      text-decoration-color: #fbcc5c;
+      padding: 5px 10px;
+      color: black;
+      display: block;
+      margin-top: 10px;
+      text-decoration-thickness: 2px; /* Adjusting underline thickness */
+      text-underline-offset: 2px; /* Adjusting underline offset */
+    }
+    #buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  max-width: 250px;
+  margin: 10px auto; /* Adjust margin as needed */
+}
+   
+    
+    #urlDisplay {
+      font-size: 36px;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+
+    
+    #logoContainer {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    #qkrsText {
+      font-size: 36px;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+  
+  
+  <div id="logoContainer">
+    <img src="https://qk.rs/duck.jpeg" alt="QK logo" height="40" width="40">
+    <span id="urlDisplay">qk.rs</span>
+  </div>
+  
+
+  
+  <form id="redirectForm">
+    <input type="text" id="inputField" placeholder="Website [SPACE] Keyword" autofocus>
+    <button type="submit" id="submitButton">Quack</button>
+  </form>
+  <br> 
+
+  <div id="buttonContainer">
+    <button type="button" class="qButton" id="copyButton">Copy URL</button>
+    <button type="button" class='qButton' id="clearButton">Clear</button>
+  </div>
+
+  <br>
+  <a href="https://docs.google.com/spreadsheets/d/1A5oU3WMTWRg8tS2VtJeSmTr7E0tmhfRgUszl9HudCs0/edit">Cheat Sheet</a>
+
+  <script>
+    
+    const urlExample = 'qk.rs'
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      const inputField = document.getElementById('inputField');
+      const goButton = document.getElementById('submitButton');
+      const copyButton = document.getElementById('copyButton');
+      const clearButton = document.getElementById('clearButton'); // Added this line
+      const urlDisplay = document.getElementById('urlDisplay');
+      
+      function updateDisplayedUrl(siteCode, remainingLetters) {
+        const url = `${siteCode}.qk.rs/${remainingLetters}`;
+        urlDisplay.textContent = url;
+      }
+
+      inputField.addEventListener('input', function() {
+        const inputValue = inputField.value.trim();
+        const delimiterIndex = inputValue.indexOf(' ');
+
+        if (delimiterIndex !== -1) {
+          const remainingLetters = inputValue.slice(delimiterIndex + 1).trim();
+          const siteCode = inputValue.slice(0, delimiterIndex).trim();
+
+          if (remainingLetters.length > 0) {
+            goButton.style.opacity = '1';
+            copyButton.style.opacity = '1';
+            clearButton.style.opacity = '1';
+            updateDisplayedUrl(siteCode, remainingLetters);
+          } else {
+            goButton.style.opacity = '0.3';
+            copyButton.style.opacity = '0';
+            clearButton.style.opacity = '0';
+
+            // Updated this line to show siteCode.qk.rs
+            urlDisplay.textContent = siteCode !== '' ? `${siteCode}.qk.rs` : urlExample;
+          }
+        } else {
+          goButton.style.opacity = '0.3';
+          copyButton.style.opacity = '0';
+          clearButton.style.opacity = '0';
+          urlDisplay.textContent = urlExample;
+        }
+      });
+
+      document.getElementById('redirectForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const inputValue = inputField.value.trim();
+
+        if (inputValue.length > 0) {
+          const delimiterIndex = inputValue.indexOf(' ');
+
+          if (delimiterIndex !== -1) {
+            const siteCode = inputValue.slice(0, delimiterIndex).trim();
+            const remainingLetters = inputValue.slice(delimiterIndex + 1).trim();
+
+            if (siteCode.length > 0 && remainingLetters.length > 0) {
+              updateDisplayedUrl(siteCode, remainingLetters);
+              window.location.href = `https://${siteCode}.qk.rs/${remainingLetters}`;
+
+            } else if (siteCode.length > 0 && remainingLetters.length === 0) {
+              window.location.href = `https://${siteCode}.qk.rs`;
+            }
+          }
+        }
+      });
+
+      copyButton.addEventListener('click', function() {
+        const inputValue = inputField.value.trim();
+        const delimiterIndex = inputValue.indexOf(' ');
+
+        if (delimiterIndex !== -1) {
+          const siteCode = inputValue.slice(0, delimiterIndex).trim();
+          const remainingLetters = inputValue.slice(delimiterIndex + 1).trim();
+
+          if (remainingLetters.length > 0) {
+            const url = `${siteCode}.qk.rs/${remainingLetters}`;
+            
+            navigator.clipboard.writeText(url).then(() => {
+              copyButton.textContent = 'Copied!';
+              setTimeout(function() {
+                copyButton.textContent = 'Copy URL';
+              }, 2000);
+            }).catch(err => {
+              console.error('Failed to copy:', err);
+            });
+          }
+        }
+      });
+
+      clearButton.addEventListener('click', function() {
+        inputField.value = '';
+        clearButton.style.opacity = '0';
+        goButton.style.opacity = '0.3';
+        copyButton.style.opacity = '0';
+        urlDisplay.textContent = urlExample;
+      });
+    });
+    
+  </script>
+</body>
+</html>
