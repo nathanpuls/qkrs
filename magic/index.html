@@ -106,5 +106,13 @@ console.log(redirectLink);
   }
 
 window.onload = redirectBasedOnParams;
+
+  // Check if the page was loaded from cache and redirect to qk.rs if necessary
+if (performance.getEntriesByType("navigation")[0].type === "back_forward") {
+  // Redirect to qk.rs if the user navigated back
+  window.location.href = 'https://qk.rs';
+}
+
+  
 </script>
 </html>
