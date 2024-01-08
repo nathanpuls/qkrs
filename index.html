@@ -1,9 +1,13 @@
+
 <!DOCTYPE html>
 <html>
 <head>
   <title>qk.rs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    :root {
+        --duck: #ffd700;
+    }
     body {
       display: flex;
       justify-content: center;
@@ -13,6 +17,7 @@
       font-family: 'Google Poppins', sans-serif;
       flex-direction: column;
       text-align: center;
+      
     }
     h1 {
       margin-bottom: 20px;
@@ -25,9 +30,19 @@
       padding: 10px;
       font-size: 16px;
       width: 250px;
-      border-radius: 5px 0 0 5px;
+      border-radius: 5px;
       border: 1px solid #ccc;
+      transition: border-color 0.3s; /* Add a transition for smoother change */
+      /*height: 35px; /* Set the height of the input field */
+
+
     }
+    #inputField:focus {
+  /*border: 2px solid var(--duck);*/
+  outline: none; /* Optional: remove the default focus outline */
+  border-width: 1px; /* Ensure the border width stays the same on focus */
+
+}
     #submitButton {
       padding: 10px 20px;
       font-size: 16px;
@@ -38,6 +53,9 @@
       cursor: pointer;
       opacity: 0.3;
       margin-left: 5px;
+      font-weight: bold;
+      
+      
     }
     .qButton {
       text-decoration: none;
@@ -61,6 +79,7 @@ opacity: 0;
       margin-top: 10px;
       text-decoration-thickness: 2px; /* Adjusting underline thickness */
       text-underline-offset: 2px; /* Adjusting underline offset */
+      font-size: 20px;
     }
     #buttonContainer {
   display: flex;
@@ -118,6 +137,19 @@ opacity: 0;
   <script>
     
     const urlExample = 'qk.rs'
+
+    window.addEventListener('pageshow', function(event) {
+  var inputField = document.getElementById('inputField');
+  if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+    // The page is loaded from the bfcache (Back-Forward Cache)
+    inputField.value = ''; // Clear the input field
+    // Additionally, adjust the opacity of buttons as needed
+    document.getElementById('submitButton').style.opacity = '0.3';
+    document.getElementById('copyButton').style.opacity = '0';
+    document.getElementById('clearButton').style.opacity = '0';
+  }
+});
+
     
     document.addEventListener('DOMContentLoaded', function() {
       const inputField = document.getElementById('inputField');
@@ -185,6 +217,7 @@ opacity: 0;
       copyButton.addEventListener('click', function() {
         const inputValue = inputField.value.trim();
         const delimiterIndex = inputValue.indexOf(' ');
+        inputField.focus();
 
         if (delimiterIndex !== -1) {
           const siteCode = inputValue.slice(0, delimiterIndex).trim();
@@ -211,6 +244,7 @@ opacity: 0;
         goButton.style.opacity = '0.3';
         copyButton.style.opacity = '0';
         urlDisplay.textContent = urlExample;
+        inputField.focus();
       });
     });
     
