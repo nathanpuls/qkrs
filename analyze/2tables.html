@@ -1,0 +1,66 @@
+ var displayDiv = document.getElementById('displayDiv');
+
+if (displayDiv) {
+  var table = document.createElement('table');
+  table.className='responsive-table';
+  
+  var tableBody = document.createElement('tbody');
+
+  // Creating a row for the title (slug value)
+  var titleRow = document.createElement('tr');
+  var titleCell = document.createElement('td');
+  titleCell.textContent = slug; // Display the title (slug value)
+  titleCell.className='title-cell';
+  titleCell.colSpan = 3; // Span the cell across 2 columns
+  titleRow.appendChild(titleCell);
+
+  tableBody.appendChild(titleRow);
+
+  // Regular expression for matching URLs
+  var urlRegex = /(https?:\/\/[^\s]+)/g;
+
+  // Iterating through key-value pairs and populating the table
+  for (const key in secondDataKeyValue) {
+    if (secondDataKeyValue.hasOwnProperty(key)) {
+      var row = document.createElement('tr');
+
+      var cellKey = document.createElement('td');
+      var cellValue = document.createElement('td');
+
+      cellKey.textContent = key;
+
+      var value = secondDataKeyValue[key];
+      var matches = value.match(urlRegex);
+      if (matches) {
+        var link = document.createElement('a');
+        link.href = matches[0]; // Assuming the first match is the link
+        link.textContent = value;
+        link.target = '_blank';
+        link.style.color = 'blue'; // Change link color if needed
+
+        cellValue.appendChild(link);
+      } else {
+        cellValue.textContent = value;
+      }
+
+      cellKey.style.border = '1px solid #ddd'; // Border style for cells
+      cellValue.style.border = '1px solid #ddd';
+
+      cellKey.style.padding = '8px'; // Padding inside cells
+      cellValue.style.padding = '8px';
+
+      cellKey.style.textAlign = 'center'; // Center content horizontally
+      cellValue.style.textAlign = 'center';
+
+      row.appendChild(cellKey);
+      row.appendChild(cellValue);
+
+      tableBody.appendChild(row);
+    }
+  }
+
+  table.appendChild(tableBody);
+  displayDiv.appendChild(table);
+} else {
+  console.log('The div with ID "displayDiv" was not found.');
+}
