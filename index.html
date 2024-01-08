@@ -1,17 +1,10 @@
 
+
 <!DOCTYPE html>
 <html>
 <head>
   <title>qk.rs</title>
-   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-<meta name="msapplication-TileColor" content="#da532c">
-<meta name="theme-color" content="#ffffff">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <style>
     :root {
         --duck: #ffd700;
@@ -59,7 +52,7 @@
       color: black;
       border-radius: 0 5px 5px 0;
       cursor: pointer;
-      opacity: 0.3;
+      opacity: 0.2;
       margin-left: 5px;
       font-weight: bold;
       
@@ -68,13 +61,15 @@
     .qButton {
       text-decoration: none;
       background-color: rgba(251, 204, 92, 0.7);
+      border: var(--duck);
       color: black;
       display: block;
-opacity: 0;
+opacity: 0.2;
        padding: 2px 10px; /* Adjusted padding */
       font-size: 14px; /* Reduced font size */
       height: 25px;
       border-radius: 5px;
+      /*font-weight: bold;*/
     }
     
     a {
@@ -126,7 +121,7 @@ opacity: 0;
     <span id="urlDisplay">qk.rs</span>
   </div>
   
-
+  <div id="siteNameDisplay"></div>
   
   <form id="redirectForm">
     <input type="text" id="inputField" placeholder="Website [SPACE] Keyword" autofocus>
@@ -145,6 +140,7 @@ opacity: 0;
   <script>
     
     const urlExample = 'qk.rs'
+    const dim = '0.2';
 
     window.addEventListener('pageshow', function(event) {
   var inputField = document.getElementById('inputField');
@@ -152,9 +148,9 @@ opacity: 0;
     // The page is loaded from the bfcache (Back-Forward Cache)
     inputField.value = ''; // Clear the input field
     // Additionally, adjust the opacity of buttons as needed
-    document.getElementById('submitButton').style.opacity = '0.3';
-    document.getElementById('copyButton').style.opacity = '0';
-    document.getElementById('clearButton').style.opacity = '0';
+    document.getElementById('submitButton').style.opacity = dim;
+    document.getElementById('copyButton').style.opacity = dim;
+    document.getElementById('clearButton').style.opacity = dim;
   }
 });
 
@@ -172,85 +168,111 @@ opacity: 0;
       }
 
       inputField.addEventListener('input', function() {
-        const inputValue = inputField.value.trim();
-        const delimiterIndex = inputValue.indexOf(' ');
+        console.log('Input event triggered'); // Add this line
 
-        if (delimiterIndex !== -1) {
-          const remainingLetters = inputValue.slice(delimiterIndex + 1).trim();
-          const siteCode = inputValue.slice(0, delimiterIndex).trim();
+  const inputValue = inputField.value.trim();
+  
+  
+  if (inputValue.length > 0) {
+  const delimiterIndex = inputValue.indexOf(' ');
+  const remainingLetters = delimiterIndex !== -1 ? inputValue.slice(delimiterIndex + 1).trim() : '';
 
-          if (remainingLetters.length > 0) {
-            goButton.style.opacity = '1';
-            copyButton.style.opacity = '1';
-            clearButton.style.opacity = '1';
-            updateDisplayedUrl(siteCode, remainingLetters);
-          } else {
-            goButton.style.opacity = '0.3';
-            copyButton.style.opacity = '0';
-            clearButton.style.opacity = '0';
+  if (remainingLetters.length > 0 || delimiterIndex === -1) {
+    const siteCode = delimiterIndex !== -1 ? inputValue.slice(0, delimiterIndex).trim() : inputValue;
+    const displayUrl = remainingLetters.length > 0 ? `${siteCode}.qk.rs/${remainingLetters}` : `${siteCode}.qk.rs`;
+    
+    urlDisplay.textContent = displayUrl;
+    goButton.style.opacity = '1';
+    copyButton.style.opacity = '1';
+    clearButton.style.opacity = '1';
+  } else {
+    goButton.style.opacity = dim;
+    copyButton.style.opacity = dim;
+    clearButton.style.opacity = dim;
+    urlDisplay.textContent = urlExample;
+  }
+} else {
+  goButton.style.opacity = dim;
+  copyButton.style.opacity = dim;
+  clearButton.style.opacity = dim;
+  urlDisplay.textContent = urlExample;
+}
 
-            // Updated this line to show siteCode.qk.rs
-            urlDisplay.textContent = siteCode !== '' ? `${siteCode}.qk.rs` : urlExample;
-          }
-        } else {
-          goButton.style.opacity = '0.3';
-          copyButton.style.opacity = '0';
-          clearButton.style.opacity = '0';
-          urlDisplay.textContent = urlExample;
-        }
       });
 
       document.getElementById('redirectForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const inputValue = inputField.value.trim();
+  event.preventDefault();
+  const inputValue = inputField.value.trim();
+  let siteCode = '';
+  let remainingLetters = '';
 
-        if (inputValue.length > 0) {
-          const delimiterIndex = inputValue.indexOf(' ');
+  if (inputValue.length > 0) {
+    const delimiterIndex = inputValue.indexOf(' ');
 
-          if (delimiterIndex !== -1) {
-            const siteCode = inputValue.slice(0, delimiterIndex).trim();
-            const remainingLetters = inputValue.slice(delimiterIndex + 1).trim();
+    if (delimiterIndex !== -1) {
+      siteCode = inputValue.slice(0, delimiterIndex).trim();
+      remainingLetters = inputValue.slice(delimiterIndex + 1).trim();
+    } else {
+      siteCode = inputValue;
+    }
 
-            if (siteCode.length > 0 && remainingLetters.length > 0) {
-              updateDisplayedUrl(siteCode, remainingLetters);
-              window.location.href = `https://${siteCode}.qk.rs/${remainingLetters}`;
+    if (siteCode.length > 0) {
+      if (remainingLetters.length > 0) {
+        updateDisplayedUrl(siteCode, remainingLetters);
+        window.location.href = `https://${siteCode}.qk.rs/${remainingLetters}`;
+      } else {
+        window.location.href = `https://${siteCode}.qk.rs`;
+      }
+    }
+  }
 
-            } else if (siteCode.length > 0 && remainingLetters.length === 0) {
-              window.location.href = `https://${siteCode}.qk.rs`;
-            }
-          }
-        }
-      });
+  console.log('siteCode:', siteCode);
+  console.log('remainingLetters:', remainingLetters);
+});
 
-      copyButton.addEventListener('click', function() {
-        const inputValue = inputField.value.trim();
-        const delimiterIndex = inputValue.indexOf(' ');
-        inputField.focus();
 
-        if (delimiterIndex !== -1) {
-          const siteCode = inputValue.slice(0, delimiterIndex).trim();
-          const remainingLetters = inputValue.slice(delimiterIndex + 1).trim();
+copyButton.addEventListener('click', function() {
+  const inputValue = inputField.value.trim();
+  const delimiterIndex = inputValue.indexOf(' ');
+  inputField.focus();
 
-          if (remainingLetters.length > 0) {
-            const url = `${siteCode}.qk.rs/${remainingLetters}`;
-            
-            navigator.clipboard.writeText(url).then(() => {
-              copyButton.textContent = 'Copied!';
-              setTimeout(function() {
-                copyButton.textContent = 'Copy URL';
-              }, 2000);
-            }).catch(err => {
-              console.error('Failed to copy:', err);
-            });
-          }
-        }
-      });
+  let siteCode = '';
+  let remainingLetters = '';
+
+  if (delimiterIndex !== -1) {
+    siteCode = inputValue.slice(0, delimiterIndex).trim();
+    remainingLetters = inputValue.slice(delimiterIndex + 1).trim();
+  } else {
+    siteCode = inputValue;
+  }
+
+  let url = '';
+
+  if (remainingLetters.length > 0) {
+    url = `${siteCode}.qk.rs/${remainingLetters}`;
+  } else {
+    url = `https://${siteCode}.qk.rs`;
+  }
+
+  navigator.clipboard.writeText(url)
+    .then(() => {
+      copyButton.textContent = 'Copied!';
+      setTimeout(function() {
+        copyButton.textContent = 'Copy URL';
+      }, 2000);
+    })
+    .catch(err => {
+      console.error('Failed to copy:', err);
+    });
+
+  
+});
 
       clearButton.addEventListener('click', function() {
         inputField.value = '';
-        clearButton.style.opacity = '0';
-        goButton.style.opacity = '0.3';
-        copyButton.style.opacity = '0';
+        clearButton.style.opacity = dim;
+        goButton.style.opacity = dim;
+        copyButton.style.opacity = dim;
         urlDisplay.textContent = urlExample;
         inputField.focus();
       });
