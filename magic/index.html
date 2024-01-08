@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,131 +21,71 @@
 </head>
 <body>
   <a href="https://qk.rs">
-  <img src="https://qk.rs/duck.jpeg" alt="Centered Image" width="100" height="100">
-</a>
-
-<!--<div id="output" style="border: 1px solid black; padding: 10px;"></div>
-<div id="output2" style="border: 1px solid black; padding: 10px;"></div>-->
-
-
-
-  
-
+    <img src="https://qk.rs/duck.jpeg" alt="Centered Image" width="100" height="100">
+  </a>
 </body>
 
-
-
 <script>
-
-
-//const outputDiv = document.getElementById('output');
-//let redirectLink = '';
-
-//let two = '2';
-
-//const outputDiv2 = document.getElementById('output2');
-      //outputDiv2.innerText = 'redirectLink: ' + redirectLink + '2';
-
-  //changed to all one var and renamed
   function redirectBasedOnParams() {
     const urlParams = new URLSearchParams(window.location.search);
     let s = urlParams.get("s");
     let a = urlParams.get("a");
-    let b = urlParams.get("b");
-    let c = urlParams.get("c");
 
     //testing purposes
     //s = 'B';
     //a = 'MAt.1'
-    
-    s = s.toLowerCase();
-    a = a.toLowerCase();
 
-    // Logic to handle missing 'b' and 'c'
-    b = b || '';
-    c = c || '';
+    s = s ? s.toLowerCase() : '';
+    a = a ? a.toLowerCase() : '';
 
     // Fetch Google Sheet data to populate redirection rules
-    var API_KEY = 'AIzaSyDtBiP0s5TwGX9_G9iMHyke4b1k86JT8i4';
-    var spreadsheetId = '1A5oU3WMTWRg8tS2VtJeSmTr7E0tmhfRgUszl9HudCs0';
-    var range = 'Sheet1!A:B';
-
-    var sheetLink = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${API_KEY}`;
+    const API_KEY = 'AIzaSyDtBiP0s5TwGX9_G9iMHyke4b1k86JT8i4';
+    const spreadsheetId = '1A5oU3WMTWRg8tS2VtJeSmTr7E0tmhfRgUszl9HudCs0';
+    const range = 'Sheet1!A:B';
+    const sheetLink = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${API_KEY}`;
 
     fetch(sheetLink)
-  .then(response => response.json())
-  .then(data => {
-    const redirectionRules = {};
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok.');
+        }
+        return response.json();
+      })
+      .then(data => {
+        const redirectionRules = {};
 
-    if (data.values && data.values.length > 0) {
-      data.values.forEach(row => {
-        // Assuming column A contains keys and column B contains URLs
-        const key = row[0] ? row[0].toLowerCase() : ''; // Convert key to lowercase
-        const value = row[1] ? row[1].toLowerCase() : ''; // Convert value to lowercase
+        if (data.values && data.values.length > 0) {
+          data.values.forEach(row => {
+            const key = row[0] ? row[0].toLowerCase() : '';
+            const value = row[1] ? row[1].toLowerCase() : '';
 
-        redirectionRules[key] = value;
-      });
-    }
+            redirectionRules[key] = value;
+          });
+        }
 
+        let redirectLink = redirectionRules[s];
+        redirectLink = redirectLink ? redirectLink.replace(/\$/, a) : null;
 
-      
-      let redirectLink = redirectionRules[s];
-redirectLink = redirectLink.toLowerCase();
-
-      
-      if (redirectLink) {
-  redirectLink = redirectLink.replace(/\$/, a);
-  //const outputDiv = document.getElementById('output');
-      //outputDiv.innerText = 'redirectLink: ' + redirectLink;
-      
-
-//httpStart
-
-function checkHttp(rowLink) {
-    if (!rowLink.startsWith('http://') && !rowLink.startsWith('https://')) {
-        rowLink = 'http://' + rowLink;
-    }
-    return rowLink;
-}
-
-redirectLink = checkHttp(redirectLink);
-console.log(redirectLink); 
-
- window.location.href = redirectLink;
-
-        } else {
+        if (!redirectLink || !redirectLink.startsWith('http')) {
           console.error("Invalid or missing site parameter");
-          // Redirect to a default page or display an error message
           window.location.href = 'https://qk.rs/404';
+        } else {
+          console.log(redirectLink);
+          window.location.href = redirectLink;
         }
       })
-      .catch(error => console.error('Error fetching data:', error));
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        window.location.href = 'https://qk.rs/404';
+      });
   }
 
-window.onload = function () {
-    // Check if the page was loaded from cache and redirect to qk.rs if necessary
+  window.onload = function () {
     if (performance.getEntriesByType("navigation")[0].type === "back_forward") {
-      // Redirect to qk.rs if the user navigated back
       window.location.href = 'https://qk.rs';
     } else {
-      // Execute your existing logic if the page wasn't loaded from cache
       redirectBasedOnParams();
     }
   };
-
-  function redirectTo404() {
-  const hasPathOrParams = window.location.pathname !== '/' || window.location.search !== '';
-
-  if (!redirectLink && hasPathOrParams) {
-    console.error("Invalid or missing site parameter");
-    window.location.href = 'https://qk.rs/404';
-  }
-}
-
-
-redirectTo404();
-
-
-  
 </script>
 </html>
