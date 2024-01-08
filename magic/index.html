@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,9 +21,13 @@
   </style>
 </head>
 <body>
-  <a href="http://qk.rs">
-  <img src="http://qk.rs/duck.jpeg" alt="Centered Image" width="100" height="100">
+  <a href="https://qk.rs">
+  <img src="https://qk.rs/duck.jpeg" alt="Centered Image" width="100" height="100">
 </a>
+
+<div id="output" style="border: 1px solid black; padding: 10px;"></div>
+<div id="output2" style="border: 1px solid black; padding: 10px;"></div>
+
 
 
   
@@ -32,6 +37,16 @@
 
 
 <script>
+
+
+const outputDiv = document.getElementById('output');
+let redirectLink = '';
+
+let two = '2';
+
+const outputDiv2 = document.getElementById('output2');
+      outputDiv2.innerText = 'redirectLink: ' + redirectLink + '2';
+
   //changed to all one var and renamed
   function redirectBasedOnParams() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -81,6 +96,9 @@ redirectLink = redirectLink.toLowerCase();
       
       if (redirectLink) {
   redirectLink = redirectLink.replace(/\$/, a);
+  //const outputDiv = document.getElementById('output');
+      //outputDiv.innerText = 'redirectLink: ' + redirectLink;
+      
 
 //httpStart
 
@@ -115,6 +133,19 @@ window.onload = function () {
       redirectBasedOnParams();
     }
   };
+
+  function redirectTo404() {
+  const hasPathOrParams = window.location.pathname !== '/' || window.location.search !== '';
+
+  if (!redirectLink && hasPathOrParams) {
+    console.error("Invalid or missing site parameter");
+    window.location.href = 'https://qk.rs/404';
+  }
+}
+
+
+redirectTo404();
+
 
   
 </script>
