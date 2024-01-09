@@ -1,265 +1,262 @@
-
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cheat Sheet</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+    />
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cheat Sheet</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap">
+    <style>
+      body {
+        font-family: "Poppins", sans-serif; /* Apply Poppins font to the body */
+      }
 
+      /* CSS for the responsive table and title styles */
+      .responsive-table {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 16px;
+        max-width: none;
+        word-wrap: break-word;
+        overflow-x: hidden; /* Hide any content that exceeds the screen width */
+        table-layout: fixed; /* Set a fixed layout to make the table responsive */
+      }
 
-  <style>
+      .responsive-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
 
-    body {
-        font-family: 'Poppins', sans-serif; /* Apply Poppins font to the body */
+        text-align: left;
+      }
 
-    }
+      .title-cell {
+        text-align: left;
+        font-weight: bold;
+        font-size: 24px;
+      }
 
-/* CSS for the responsive table and title styles */
-.responsive-table {
-  border-collapse: collapse;
-  width: 100%;
-  font-size: 16px;
-  max-width: none;
-  word-wrap: break-word;
-  overflow-x: hidden; /* Hide any content that exceeds the screen width */
-  table-layout: fixed; /* Set a fixed layout to make the table responsive */
-}
+      h1 {
+        text-align: center;
+        font-weight: bold;
+      }
 
-.responsive-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  
-  text-align: left;
-  
-}
+      p {
+        text-align: center;
+        font-size: 16px;
+      }
+      .centered-content {
+        display: flex;
+        justify-content: center; /* Center aligns content horizontally */
+        align-items: center; /* Center aligns content vertically */
+      }
 
-.title-cell {
-  text-align: left;
-  font-weight: bold;
-  font-size: 24px;
+      .image-with-text {
+        display: flex;
+        align-items: center; /* Aligns image and text vertically */
+      }
 
- 
+      .image-with-text img {
+        margin-right: 5px; /* Adds some space between the image and text */
+      }
+      a {
+        text-decoration: underline;
+        background-color: none; /*rgba(251, 204, 92, 0.7);*/
+        text-decoration-color: #fbcc5c;
+        padding: 5px 10px;
+        color: black;
+        display: block;
+        margin-top: 10px;
+        text-decoration-thickness: 2px; /* Adjusting underline thickness */
+        text-underline-offset: 2px; /* Adjusting underline offset */
+        font-size: 16px;
+      }
 
-}
+      #example-link {
+        padding: 0;
+      }
+    </style>
+  </head>
 
-h1 {
-text-align: center;
-font-weight: bold;
-  }
-
-  p {
-text-align: center;
-font-size: 20px;
-
-  }
-  .centered-content {
-  display: flex;
-  justify-content: center; /* Center aligns content horizontally */
-  align-items: center; /* Center aligns content vertically */
-}
-
-.image-with-text {
-  display: flex;
-  align-items: center; /* Aligns image and text vertically */
-}
-
-.image-with-text img {
-  margin-right: 10px; /* Adds some space between the image and text */
-}
-a {
-      text-decoration: underline;
-      background-color: none; /*rgba(251, 204, 92, 0.7);*/
-      text-decoration-color: #fbcc5c;
-      padding: 5px 10px;
-      color: black;
-      display: block;
-      margin-top: 10px;
-      text-decoration-thickness: 2px; /* Adjusting underline thickness */
-      text-underline-offset: 2px; /* Adjusting underline offset */
-      font-size: 20px;
-    }
-
- 
-
-
-
-
-
-  </style>
-</head>
-
-<body>
-<a href="https://qk.rs">back to Quack</a>
-    <div class="centered-content">
+  <body>
+    <a href="https://qk.rs">
+      <div class="left-content">
         <div class="image-with-text">
-          <img src="https://qk.rs/duck.jpeg" alt="duck" height="40">
-          <h1>Cheatsheet</h1>
+          <img src="https://qk.rs/duck.jpeg" alt="duck" height="40" />
+          <span>Back to Quack</span>
         </div>
       </div>
-      
-      
+    </a>
 
-<p>'$' represents the keyword(s) you type in. Example 'a' [space] 'toys' would take you to a.qk.rs/toys which would be an Amazon search for 'toys'.</p>
-<div id="displayDiv"></div>
+    <h1>Cheatsheet</h1>
 
+    <p style="white-space: nowrap">
+      <span style="display: inline-block"
+        >'$' = your search phrase. 'r' [space] 'elf' would take you to</span
+      >
+      <a
+        href="https://r.qk.rs/elf"
+        id="example-link"
+        style="display: inline-block"
+        >r.qk.rs/elf</a
+      >
+      <span style="display: inline-block"
+        >which would be a Rotten Tomatoes search for 'elf'.</span
+      >
+    </p>
 
-<script>
+    <div id="displayDiv"></div>
 
-function styleDollarSigns() {
-  const elementsWithDollarSigns = document.querySelectorAll('*');
-  
-  elementsWithDollarSigns.forEach(element => {
-    const text = element.textContent || element.innerText;
-    if (text.includes('$')) {
-      const modifiedText = text.replace(/\$/g, '<span style="color: #fbcc5c;">$</span>');
-      element.innerHTML = modifiedText;
-    }
-  });
-}
+    <script>
+      function styleDollarSigns() {
+        const elementsWithDollarSigns = document.querySelectorAll("*");
 
+        elementsWithDollarSigns.forEach((element) => {
+          const text = element.textContent || element.innerText;
+          if (text.includes("$")) {
+            const modifiedText = text.replace(
+              /\$/g,
+              '<span style="color: #fbcc5c;">$</span>'
+            );
+            element.innerHTML = modifiedText;
+          }
+        });
+      }
 
-  function redirectBasedOnSlug() {
-    const urlParams = new URLSearchParams(window.location.search);
-    let slug = urlParams.get("slug");
-    
-    slug = 'magic'; // Test - comment out for live
-    //document.title=slug;
-    slug = slug.toLowerCase();
- var API_KEY = 'AIzaSyDtBiP0s5TwGX9_G9iMHyke4b1k86JT8i4';
-    var firstSpreadsheetId = '1AkOUgMYBIbg7ZhXciPIdz0mlDqc6lZzHb10oNp5rc8I';
-    var firstRange = 'Sheet1!A:B';
-    var firstSheetLink = `https://sheets.googleapis.com/v4/spreadsheets/${firstSpreadsheetId}/values/${firstRange}?key=${API_KEY}`;
+      function redirectBasedOnSlug() {
+        const urlParams = new URLSearchParams(window.location.search);
+        let slug = urlParams.get("slug");
 
-    fetch(firstSheetLink)
-      .then(response => response.json())
-      .then(data => {
-        const redirectionRules = {};
+        slug = "magic"; // Test - comment out for live
+        //document.title=slug;
+        slug = slug.toLowerCase();
+        var API_KEY = "AIzaSyDtBiP0s5TwGX9_G9iMHyke4b1k86JT8i4";
+        var firstSpreadsheetId = "1AkOUgMYBIbg7ZhXciPIdz0mlDqc6lZzHb10oNp5rc8I";
+        var firstRange = "Sheet1!A:B";
+        var firstSheetLink = `https://sheets.googleapis.com/v4/spreadsheets/${firstSpreadsheetId}/values/${firstRange}?key=${API_KEY}`;
 
-        if (data.values && data.values.length > 0) {
-          data.values.forEach(row => {
-            const key = row[0];
-            const value = row[1];
+        fetch(firstSheetLink)
+          .then((response) => response.json())
+          .then((data) => {
+            const redirectionRules = {};
 
-            redirectionRules[key] = value;
-          });
-        }
- 
-        let redirectLink = redirectionRules[slug];
+            if (data.values && data.values.length > 0) {
+              data.values.forEach((row) => {
+                const key = row[0];
+                const value = row[1];
 
-        if (redirectLink) {
-          console.log('First Redirect Link: ' + redirectLink);
+                redirectionRules[key] = value;
+              });
+            }
 
-          // Use redirectLink as the API key for the second spreadsheet
-          var secondSpreadsheetId = redirectLink; // Assuming redirectLink contains the second spreadsheet ID
-          var secondRange = 'Sheet1!A1:C';
+            let redirectLink = redirectionRules[slug];
 
-          var secondSheetLink = `https://sheets.googleapis.com/v4/spreadsheets/${secondSpreadsheetId}/values/${secondRange}?key=${API_KEY}`;
+            if (redirectLink) {
+              console.log("First Redirect Link: " + redirectLink);
 
-                  fetch(secondSheetLink)
-            .then(response => response.json())
-            .then(secondData => {
-              // Process data from the second spreadsheet
-              console.log('Data from Second Spreadsheet:', secondData);
+              // Use redirectLink as the API key for the second spreadsheet
+              var secondSpreadsheetId = redirectLink; // Assuming redirectLink contains the second spreadsheet ID
+              var secondRange = "Sheet1!A1:C";
 
-              // Organize data into key-value pairs
-              const secondDataKeyValue = {};
+              var secondSheetLink = `https://sheets.googleapis.com/v4/spreadsheets/${secondSpreadsheetId}/values/${secondRange}?key=${API_KEY}`;
 
-              if (secondData.values && secondData.values.length > 0) {
-                secondData.values.forEach(row => {
-                  const key = row[0];
-                  const value = row[1];
+              fetch(secondSheetLink)
+                .then((response) => response.json())
+                .then((secondData) => {
+                  // Process data from the second spreadsheet
+                  console.log("Data from Second Spreadsheet:", secondData);
 
-                  secondDataKeyValue[key] = value;
-                });
-              }
+                  // Organize data into key-value pairs
+                  const secondDataKeyValue = {};
 
-              
-              var displayDiv = document.getElementById('displayDiv');
+                  if (secondData.values && secondData.values.length > 0) {
+                    secondData.values.forEach((row) => {
+                      const key = row[0];
+                      const value = row[1];
 
-              var displayDiv = document.getElementById('displayDiv');
+                      secondDataKeyValue[key] = value;
+                    });
+                  }
 
-if (displayDiv) {
-  var table = document.createElement('table');
-  table.className = 'responsive-table';
+                  var displayDiv = document.getElementById("displayDiv");
 
-  var tableBody = document.createElement('tbody');
+                  var displayDiv = document.getElementById("displayDiv");
 
-  // Iterating through the fetched data and populating the table
-  if (secondData.values && secondData.values.length > 0) {
-    // Extract the header row and the data rows
-    var headerRow = secondData.values[0];
-    var dataRows = secondData.values.slice(1);
+                  if (displayDiv) {
+                    var table = document.createElement("table");
+                    table.className = "responsive-table";
 
-    // Sorting data rows based on values in column A (index 0)
-    dataRows.sort((a, b) => a[0].localeCompare(b[0])); // Sort based on column A values
+                    var tableBody = document.createElement("tbody");
 
-    // Create and append the header row at the top
-    var headerRowElement = document.createElement('tr');
-    headerRow.forEach(headerCell => {
-      var cell = document.createElement('td');
-      cell.textContent = headerCell;
+                    // Iterating through the fetched data and populating the table
+                    if (secondData.values && secondData.values.length > 0) {
+                      // Extract the header row and the data rows
+                      var headerRow = secondData.values[0];
+                      var dataRows = secondData.values.slice(1);
 
-      cell.style.border = '1px solid #ddd'; // Border style for cells
-      cell.style.padding = '8px'; // Padding inside cells
-      cell.style.textAlign = 'left'; // Center content horizontally
-      cell.style.fontWeight = 'bold';   
+                      // Sorting data rows based on values in column A (index 0)
+                      dataRows.sort((a, b) => a[0].localeCompare(b[0])); // Sort based on column A values
 
-      headerRowElement.appendChild(cell);
-    });
-    tableBody.appendChild(headerRowElement);
+                      // Create and append the header row at the top
+                      var headerRowElement = document.createElement("tr");
+                      headerRow.forEach((headerCell) => {
+                        var cell = document.createElement("td");
+                        cell.textContent = headerCell;
 
-    // Append sorted data rows
-    dataRows.forEach(rowData => {
-      var row = document.createElement('tr');
+                        cell.style.border = "1px solid #ddd"; // Border style for cells
+                        cell.style.padding = "8px"; // Padding inside cells
+                        cell.style.textAlign = "left"; // Center content horizontally
+                        cell.style.fontWeight = "bold";
 
-      rowData.forEach((cellValue, cellIndex) => {
-        var cell = document.createElement('td');
-        cell.textContent = cellValue;
+                        headerRowElement.appendChild(cell);
+                      });
+                      tableBody.appendChild(headerRowElement);
 
-        cell.style.border = '1px solid #ddd'; // Border style for cells
-        cell.style.padding = '8px'; // Padding inside cells
-        cell.style.textAlign = 'left'; 
+                      // Append sorted data rows
+                      dataRows.forEach((rowData) => {
+                        var row = document.createElement("tr");
 
-     
+                        rowData.forEach((cellValue, cellIndex) => {
+                          var cell = document.createElement("td");
+                          cell.textContent = cellValue;
 
-        row.appendChild(cell);
-      });
+                          cell.style.border = "1px solid #ddd"; // Border style for cells
+                          cell.style.padding = "8px"; // Padding inside cells
+                          cell.style.textAlign = "left";
 
-      tableBody.appendChild(row);
-    });
-  }
+                          row.appendChild(cell);
+                        });
 
-  table.appendChild(tableBody);
-  displayDiv.appendChild(table);
-  
-} else {
-  console.log('The div with ID "displayDiv" was not found.');
-}
+                        tableBody.appendChild(row);
+                      });
+                    }
 
+                    table.appendChild(tableBody);
+                    displayDiv.appendChild(table);
+                  } else {
+                    console.log('The div with ID "displayDiv" was not found.');
+                  }
+                })
+                .catch((error) =>
+                  console.error(
+                    "Error fetching data from second spreadsheet:",
+                    error
+                  )
+                );
+            } else {
+              console.error(
+                "Invalid or missing site parameter for the first spreadsheet"
+              );
+            }
+          })
+          .catch((error) =>
+            console.error("Error fetching data from first spreadsheet:", error)
+          );
+      }
 
- 
-
-
-
-
-
-            })
-            .catch(error => console.error('Error fetching data from second spreadsheet:', error));
-        } else {
-          console.error("Invalid or missing site parameter for the first spreadsheet");
-        }
-      })
-      .catch(error => console.error('Error fetching data from first spreadsheet:', error));
-  }
-
-  window.onload = redirectBasedOnSlug;
-
-  
-  
-  
-</script> 
- 
-</body>
+      window.onload = redirectBasedOnSlug;
+    </script>
+  </body>
 </html>
