@@ -26,12 +26,29 @@
       height: auto;
       margin-bottom: 20px;
     }
+    /* Define the animation */
+@keyframes wiggle {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(5deg); }
+  50% { transform: rotate(0deg); }
+  75% { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Apply the animation to the image */
+.wiggle {
+  animation-name: wiggle;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  transform-origin: center;
+}
+
   </style>
 </head>
 <body>
-  <a href="https://qk.rs">
-    <img src="https://qk.rs/duck.jpeg" alt="Centered Image" width="100" height="100">
-  </a>
+    <a href="https://qk.rs">
+        <img src="https://qk.rs/duck.jpeg" alt="Centered Image" width="100" height="100" class="wiggle">
+      </a>
 </body>
 
 <script>
