@@ -5,9 +5,12 @@
 <head>
   <title>qk.rs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
   <style>
     :root {
         --duck: #ffd700;
+        --sec: black;
     }
     body {
       display: flex;
@@ -35,6 +38,7 @@
       border: 1px solid #ccc;
       transition: border-color 0.3s; /* Add a transition for smoother change */
       /*height: 35px; /* Set the height of the input field */
+      
 
 
     }
@@ -50,11 +54,11 @@
       border: none;
       background-color: #fbcc5c;
       color: black;
-      border-radius: 0 5px 5px 0;
+      border-radius: 5px;
       cursor: pointer;
       opacity: 0.2;
-      margin-left: 5px;
-      font-weight: bold;
+      margin-left: 10px;
+      font-weight: none;
       
       
     }
@@ -82,7 +86,7 @@ opacity: 0.2;
       margin-top: 10px;
       text-decoration-thickness: 2px; /* Adjusting underline thickness */
       text-underline-offset: 2px; /* Adjusting underline offset */
-      font-size: 20px;
+      font-size: 16px;
     }
     #buttonContainer {
   display: flex;
@@ -111,28 +115,44 @@ opacity: 0.2;
       font-weight: bold;
       margin-left: 10px;
     }
+    #copyIcon {
+        margin-left: 10px;
+        opacity: 0.1;
+        color: var(--sec);
+    }
   </style>
 </head>
 <body>
   
   
-  <div id="logoContainer">
-    <img src="https://qk.rs/duck.jpeg" alt="QK logo" height="40" width="40">
-    <span id="urlDisplay">qk.rs</span>
-  </div>
+    <div id="logoContainer">
+        <img src="https://qk.rs/duck.jpeg" alt="QK logo" height="40" width="40">
+        <span id="urlDisplay">qk.rs</span>
+        <span id="copyIcon"><i class="far fa-copy"></i></span>
+      </div>
+      
+      
   
-  <div id="siteNameDisplay"></div>
-  
-  <form id="redirectForm">
-    <input type="text" id="inputField" placeholder="Website [SPACE] Keyword" autofocus>
-    <button type="submit" id="submitButton">Quack</button>
-  </form>
-  <br> 
+  <div id="siteNameDisplay"></div> <!--COMING SOON-->
 
   <div id="buttonContainer">
-    <button type="button" class="qButton" id="copyButton">Copy URL</button>
-    <button type="button" class='qButton' id="clearButton">Clear</button>
+    <!--<button type="button" class="qButton" id="copyButton">Copy URL</button>-->
+    <!--<button type="button" class='qButton' id="clearButton">Clear</button>-->
   </div>
+  
+  <form id="redirectForm">
+    <div style="position: relative;">
+      <input type="text" id="inputField" placeholder="Site code [SPACE] Keyword" autofocus>
+      <span id="clearInput" style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); cursor: pointer; display: none;">
+        <i class="fas fa-times-circle"></i>
+      </span>
+    </div>
+    <button type="submit" id="submitButton">Quack</button>
+  </form>
+  
+  
+
+  
 
   <br>
   <!--<a href="https://docs.google.com/spreadsheets/d/1A5oU3WMTWRg8tS2VtJeSmTr7E0tmhfRgUszl9HudCs0/edit">Cheat Sheet</a>-->
@@ -140,6 +160,41 @@ opacity: 0.2;
   <a href="https://qk.rs/cheatsheet.html">Cheat Sheet</a>
 
   <script>
+
+//reset urlDisplay 
+
+function setURLDisplay() {
+    const inputField = document.getElementById('inputField');
+    const urlDisplay = document.getElementById('urlDisplay');
+    const urlExample = 'qk.rs'; // Change this to your desired URL
+
+    if (inputField.value === '') {
+      urlDisplay.textContent = urlExample;
+    }
+  }
+
+  // Event listener to detect input changes
+  document.getElementById('inputField').addEventListener('input', setURLDisplay);
+
+  // Check if input is empty initially
+  setURLDisplay();
+
+  //end
+    
+
+const inputField = document.getElementById('inputField');
+  const clearInput = document.getElementById('clearInput');
+
+  inputField.addEventListener('input', function() {
+    clearInput.style.display = this.value.trim() !== '' ? 'inline-block' : 'none';
+  });
+
+  clearInput.addEventListener('click', function() {
+    inputField.value = '';
+    clearInput.style.display = 'none';
+    inputField.focus();
+    urlDisplay.textContent = urlExample;
+  });
     
     const urlExample = 'qk.rs'
     const dim = '0.2';
@@ -153,6 +208,8 @@ opacity: 0.2;
     document.getElementById('submitButton').style.opacity = dim;
     document.getElementById('copyButton').style.opacity = dim;
     document.getElementById('clearButton').style.opacity = dim;
+    urlDisplay.textContent = urlExample;
+
   }
 });
 
@@ -267,6 +324,8 @@ copyButton.addEventListener('click', function() {
       console.error('Failed to copy:', err);
     });
 
+    
+
   
 });
 
@@ -278,7 +337,53 @@ copyButton.addEventListener('click', function() {
         urlDisplay.textContent = urlExample;
         inputField.focus();
       });
+
+      
+    
     });
+
+    
+    
+  const copyIcon = document.getElementById('copyIcon');
+  copyIcon.addEventListener('click', function() {
+    const inputValue = document.getElementById('inputField').value.trim();
+    const delimiterIndex = inputValue.indexOf(' ');
+    let siteCode = '';
+    let remainingLetters = '';
+
+    if (delimiterIndex !== -1) {
+      siteCode = inputValue.slice(0, delimiterIndex).trim();
+      remainingLetters = inputValue.slice(delimiterIndex + 1).trim();
+    } else {
+      siteCode = inputValue;
+    }
+
+    let url = '';
+
+    if (siteCode.trim() === '') {
+  url = 'https://qk.rs';
+} else if (remainingLetters.length > 0) {
+  url = `https://${siteCode}.qk.rs/${remainingLetters}`;
+} else {
+  url = `https://${siteCode}.qk.rs`;
+}
+
+    navigator.clipboard.writeText(url)
+      .then(() => {
+        copyIcon.innerHTML = '<i class="fas fa-check"></i>';
+        setTimeout(function() {
+          copyIcon.innerHTML = '<i class="far fa-copy"></i>';
+          inputField.focus(); // Set focus back to the input field
+        }, 2000);
+      })
+      .catch(err => {
+        console.error('Failed to copy:', err);
+      });
+  });
+
+
+
+
     
   </script>
 </body>
