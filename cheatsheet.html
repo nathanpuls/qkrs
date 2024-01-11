@@ -199,40 +199,45 @@
                       var dataRows = secondData.values.slice(1);
 
                       // Sorting data rows based on values in column A (index 0)
-                      dataRows.sort((a, b) => a[0].localeCompare(b[0])); // Sort based on column A values
+dataRows.sort((a, b) => a[0].localeCompare(b[0])); // Sort based on column A values
 
-                      // Create and append the header row at the top
-                      var headerRowElement = document.createElement("tr");
-                      headerRow.forEach((headerCell) => {
-                        var cell = document.createElement("td");
-                        cell.textContent = headerCell;
+// Create and append the header row at the top
+var headerRowElement = document.createElement("tr");
 
-                        cell.style.border = "1px solid #ddd"; // Border style for cells
-                        cell.style.padding = "8px"; // Padding inside cells
-                        cell.style.textAlign = "left"; // Center content horizontally
-                        cell.style.fontWeight = "bold";
+// Reorder header cells from A C B
+[0, 2, 1].forEach((headerIndex) => {
+    var cell = document.createElement("td");
+    cell.textContent = headerRow[headerIndex];
 
-                        headerRowElement.appendChild(cell);
-                      });
-                      tableBody.appendChild(headerRowElement);
+    cell.style.border = "1px solid #ddd"; // Border style for cells
+    cell.style.padding = "8px"; // Padding inside cells
+    cell.style.textAlign = "left"; // Center content horizontally
+    cell.style.fontWeight = "bold";
 
-                      // Append sorted data rows
-                      dataRows.forEach((rowData) => {
-                        var row = document.createElement("tr");
+    headerRowElement.appendChild(cell);
+});
 
-                        rowData.forEach((cellValue, cellIndex) => {
-                          var cell = document.createElement("td");
-                          cell.textContent = cellValue;
+tableBody.appendChild(headerRowElement);
 
-                          cell.style.border = "1px solid #ddd"; // Border style for cells
-                          cell.style.padding = "8px"; // Padding inside cells
-                          cell.style.textAlign = "left";
+// Append sorted data rows
+dataRows.forEach((rowData) => {
+    var row = document.createElement("tr");
 
-                          row.appendChild(cell);
-                        });
+    // Reorder columns from A C B
+    [0, 2, 1].forEach((cellIndex) => {
+        var cell = document.createElement("td");
+        cell.textContent = rowData[cellIndex];
 
-                        tableBody.appendChild(row);
-                      });
+        cell.style.border = "1px solid #ddd"; // Border style for cells
+        cell.style.padding = "8px"; // Padding inside cells
+        cell.style.textAlign = "left";
+
+        row.appendChild(cell);
+    });
+
+    tableBody.appendChild(row);
+});
+
                     }
 
                     table.appendChild(tableBody);
