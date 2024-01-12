@@ -82,8 +82,8 @@
 
         if (data.values && data.values.length > 0) {
           data.values.forEach(row => {
-            const key = row[0] ? row[0].toLowerCase() : '';
-            const value = row[1] ? row[1].toLowerCase() : '';
+            const key = row[0] ? row[0] : ''; //was .toLowerCase()
+            const value = row[1] ? row[1] : ''; //.toLowerCase()
 
             redirectionRules[key] = value;
           });
