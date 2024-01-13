@@ -1,0 +1,94 @@
+.top-section {
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between; /* Update this property to space-between */
+  align-items: center;
+  z-index: 1000;
+  border-bottom: 1px solid #ddd;
+}
+.image-with-text {
+  display: flex;
+  align-items: center;
+}
+
+.image-with-text img {
+  margin-right: 5px;
+}
+.title-cell {
+  text-align: center; /* Update to center align */
+  font-weight: bold;
+  font-size: 24px;
+  flex-grow: 1; /* Added to take available space */
+}
+body {
+  font-family: "Poppins", sans-serif; /* Apply Poppins font to the body */
+}
+
+/* CSS for the responsive table and title styles */
+.responsive-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 16px;
+  max-width: none;
+  word-wrap: break-word;
+  overflow-x: hidden; /* Hide any content that exceeds the screen width */
+  table-layout: fixed; /* Set a fixed layout to make the table responsive */
+}
+
+.responsive-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+
+  text-align: left;
+}
+
+.title-cell {
+  text-align: center;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+h1 {
+  text-align: center;
+  font-weight: bold;
+  font-size: 24px;
+  margin-top: 20px; /* Add margin below the sticky top section */
+}
+
+p {
+  text-align: center;
+  font-size: 16px;
+}
+.centered-content {
+  display: flex;
+  justify-content: center; /* Center aligns content horizontally */
+  align-items: center; /* Center aligns content vertically */
+}
+
+.image-with-text {
+  display: flex;
+  align-items: center; /* Aligns image and text vertically */
+}
+
+.image-with-text img {
+  margin-right: 5px; /* Adds some space between the image and text */
+}
+a {
+  text-decoration: underline;
+  background-color: none; /*rgba(251, 204, 92, 0.7);*/
+  text-decoration-color: #fbcc5c;
+  padding: 5px 10px;
+  color: black;
+  display: block;
+  margin-top: 10px;
+  text-decoration-thickness: 2px; /* Adjusting underline thickness */
+  text-underline-offset: 2px; /* Adjusting underline offset */
+  font-size: 16px;
+}
+
+#example-link {
+  padding: 0;
+}
