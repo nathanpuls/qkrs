@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cheat Sheet</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap">
+
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0; /* Remove default margin to ensure full-width */
+    }
+
+    /* Sticky top section styles */
+    .top-section {
+      position: sticky;
+      top: 0;
+      background-color: #ffffff;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between; /* Update this property to space-between */
+      align-items: center;
+      z-index: 1000;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .image-with-text {
+      display: flex;
+      align-items: center;
+    }
+
+    .image-with-text img {
+      margin-right: 5px;
+    }
+
+    .title-cell {
+      text-align: center; /* Update to center align */
+      font-weight: bold;
+      font-size: 24px;
+      flex-grow: 1; /* Added to take available space */
+    }
+
+    h1 {
+      text-align: center;
+      font-weight: bold;
+      font-size: 24px;
+      margin-top: 20px; /* Add margin below the sticky top section */
+    }
+
+    p {
+      text-align: center;
+      font-size: 16px;
+    }
+
+    a {
+      text-decoration: underline;
+      color: black;
+      margin-top: 10px;
+      padding: 5px 10px;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 2px;
+      font-size: 16px;
+    }
+
+    #example-link {
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sticky top section -->
+  <div class="top-section">
+    <a href="https://qk.rs" class="image-with-text">
+      <img src="https://qk.rs/duck.jpeg" alt="duck" height="40" />
+      <span>Back to Quack</span>
+    </a>
+    <h1 class="title-cell">Cheatsheet</h1>
+  </div>
+
+
+
+
+  <p style="white-space: wrap">
+    <span style="display: inline-block"
+      >'$' = your search phrase. 'r' [space] 'elf' would take you to</span
+    >
+    <a
+      href="https://r.qk.rs/elf"
+      id="example-link"
+      style="display: inline-block"
+      >r.qk.rs/elf</a
+    >
+    <span style="display: inline-block"
+      >which would be a Rotten Tomatoes search for 'elf'.</span
+    >
+  </p>
+
+  <div id="displayDiv"></div>
+
+  <script>cheatsheet.js</script>
+</body>
+</html>
