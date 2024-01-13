@@ -45,7 +45,7 @@ function redirectBasedOnParams() {
                     window.location.href = redirectRow.redirectUrl;
                 } else {
                     console.error("Invalid or missing site parameter");
-                    window.location.href = 'https://qk.rs/404';
+                    //window.location.href = '../404.html'; //comment out when testing
                 }
             } else {
                 // If 'a' is not empty, use the existing logic
@@ -53,7 +53,7 @@ function redirectBasedOnParams() {
 
                 if (!redirectLink || !redirectLink.startsWith('http')) {
                     console.error("Invalid or missing site parameter");
-                    window.location.href = 'https://qk.rs/404';
+                    window.location.href = '../404.html';
                 } else {
                     console.log(redirectLink);
                     window.location.href = redirectLink;
@@ -62,13 +62,13 @@ function redirectBasedOnParams() {
         })
         .catch(error => {
             console.error('Error fetching data:', error);
-            window.location.href = 'https://qk.rs/404';
+            window.location.href = '../index.html';
         });
 }  
 
 window.onload = function () {
     if (performance.getEntriesByType("navigation")[0].type === "back_forward") {
-        window.location.href = 'https://qk.rs';
+        window.location.href = '../index.html';
     } else {
         redirectBasedOnParams();
     }

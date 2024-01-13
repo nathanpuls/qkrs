@@ -1,0 +1,110 @@
+:root {
+  --duck: #ffd700;
+  --sec: black;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: "Google Poppins", sans-serif;
+  flex-direction: column;
+  text-align: center;
+}
+h1 {
+  margin-bottom: 20px;
+}
+form {
+  display: flex;
+  align-items: center;
+}
+#inputField {
+  padding: 10px;
+  font-size: 16px;
+  width: 250px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s; /* Add a transition for smoother change */
+  /*height: 35px; /* Set the height of the input field */
+}
+#inputField:focus {
+  /*border: 2px solid var(--duck);*/
+  outline: none; /* Optional: remove the default focus outline */
+  border-width: 1px; /* Ensure the border width stays the same on focus */
+}
+#submitButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  background-color: #fbcc5c;
+  color: black;
+  border-radius: 5px;
+  cursor: pointer;
+  opacity: 0.2;
+  margin-left: 10px;
+  font-weight: none;
+}
+.qButton {
+  text-decoration: none;
+  background-color: rgba(251, 204, 92, 0.7);
+  border: var(--duck);
+  color: black;
+  display: block;
+  opacity: 0.2;
+  padding: 2px 10px; /* Adjusted padding */
+  font-size: 14px; /* Reduced font size */
+  height: 25px;
+  border-radius: 5px;
+  /*font-weight: bold;*/
+}
+
+a {
+  text-decoration: underline;
+  background-color: none; /*rgba(251, 204, 92, 0.7);*/
+  text-decoration-color: #fbcc5c;
+  padding: 5px 10px;
+  color: black;
+  display: block;
+  margin-top: 10px;
+  text-decoration-thickness: 2px; /* Adjusting underline thickness */
+  text-underline-offset: 2px; /* Adjusting underline offset */
+  font-size: 16px;
+}
+#buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  max-width: 250px;
+  margin: 10px auto; /* Adjust margin as needed */
+}
+
+#urlDisplay {
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+#logoContainer {
+  display: flex;
+  width: 100px; /* Adjust the width as needed */
+  margin-right: 270px;
+
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#qkrsText {
+  /*font-size: 24px;*/
+  font-weight: bold;
+  margin-left: 10px;
+}
+#copyIcon {
+  margin-left: 10px;
+  opacity: 0.1;
+  color: var(--sec);
+}
+.check-icon {
+  color: green;
+  opacity: 1;
+}

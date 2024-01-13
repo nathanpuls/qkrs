@@ -1,0 +1,53 @@
+body {
+    font-family: 'Poppins', sans-serif; /* Apply Poppins font to the whole body */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: black;
+    color: white;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    display: block; /* Center the image */
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+
+  .button-container {
+    margin-top: 20px; /* Adjust the margin as needed */
+  }
+
+  .qButton {
+    text-decoration: none;
+    background-color: rgba(251, 204, 92, 0.7);
+    color: black;
+    padding: 2px 10px; /* Adjusted padding */
+    font-size: 14px; /* Reduced font size */
+    height: 25px;
+    border-radius: 5px;
+  }
+  a {
+    text-decoration: underline;
+    background-color: none; /*rgba(251, 204, 92, 0.7);*/
+    color: white;
+    text-decoration-color: #fbcc5c;
+    padding: 5px 10px;
+    color: black;
+    display: block;
+    margin-top: 10px;
+    text-decoration-thickness: 2px; /* Adjusting underline thickness */
+    text-underline-offset: 2px; /* Adjusting underline offset */
+    font-size: 16px;
+  }
+  .home-btn {
+    font-size: 16px;
+    color: white;
+  }
