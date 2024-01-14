@@ -99,7 +99,7 @@ a {
 }
 
 
-#helpButton {
+#menuBtn {
   position: fixed;
   top: 30px;
   left: 30px;
@@ -115,6 +115,8 @@ a {
   cursor: pointer;
   opacity:1;
   padding: 5px;
+  text-decoration: none;
+
 }
 
 
