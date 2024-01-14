@@ -198,11 +198,14 @@ copyIcon.addEventListener("click", function () {
 
   if (siteCode.trim() === "") {
     url = "https://qk.rs";
-  } else if (remainingLetters.length > 0) {
-    url = `https://${siteCode}.qk.rs/${remainingLetters}`;
   } else {
-    url = `https://${siteCode}.qk.rs`;
+    url = `https://${siteCode}.qk.rs/${remainingLetters || ''}`;
   }
+  
+  url = url.toLowerCase().replace(/^https:\/\//, '').replace(/\s+/g, '+');
+  
+
+
 
   navigator.clipboard
     .writeText(url)
