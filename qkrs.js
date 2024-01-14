@@ -1,8 +1,10 @@
-window.onload = function() {
-  document.getElementById('yourInput').value = '';
-
+function resetInputAndFocus() {
+  document.getElementById('inputField').value = '';
   document.getElementById('inputField').focus();
-};
+}
+
+// Add an event listener for the window.onload event
+window.addEventListener('load', resetInputAndFocus);
 
 //reset urlDisplay
 
