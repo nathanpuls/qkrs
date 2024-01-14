@@ -41,7 +41,7 @@ clearInput.addEventListener("click", function () {
 });
 
 const urlExample = "qk.rs";
-
+const dim = "0.2";
 
 window.addEventListener("pageshow", function (event) {
   var inputField = document.getElementById("inputField");
@@ -51,8 +51,10 @@ window.addEventListener("pageshow", function (event) {
   ) {
     // The page is loaded from the bfcache (Back-Forward Cache)
     inputField.value = ""; // Clear the input field
-    
-    
+    // Additionally, adjust the opacity of buttons as needed
+    document.getElementById("submitButton").style.opacity = dim;
+    document.getElementById("copyButton").style.opacity = dim;
+    document.getElementById("clearButton").style.opacity = dim;
     urlDisplay.textContent = urlExample;
   }
 });
@@ -93,13 +95,19 @@ document.addEventListener("DOMContentLoaded", function () {
             : `${siteCode}.qk.rs`;
 
         urlDisplay.textContent = displayUrl.toLowerCase(); // urlDisplay to lowercase
-   
+        goButton.style.opacity = "1";
+        copyButton.style.opacity = "1";
+        clearButton.style.opacity = "1";
       } else {
-        
+        goButton.style.opacity = dim;
+        copyButton.style.opacity = dim;
+        clearButton.style.opacity = dim;
         urlDisplay.textContent = urlExample;
       }
     } else {
-    
+      goButton.style.opacity = dim;
+      copyButton.style.opacity = dim;
+      clearButton.style.opacity = dim;
       urlDisplay.textContent = urlExample;
     }
   });
@@ -174,7 +182,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   clearButton.addEventListener("click", function () {
     inputField.value = "";
-    
+    clearButton.style.opacity = dim;
+    goButton.style.opacity = dim;
+    copyButton.style.opacity = dim;
     urlDisplay.textContent = urlExample;
     inputField.focus();
   });

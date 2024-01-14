@@ -1,6 +1,7 @@
 :root {
   --duck: #ffd700;
   --sec: black;
+  --menu: 30px;
 }
 body {
   display: flex;
@@ -27,6 +28,7 @@ form {
   border: 1px solid #ccc;
   transition: border-color 0.3s; /* Add a transition for smoother change */
   /*height: 35px; /* Set the height of the input field */
+  margin-top: 0px;
 }
 #inputField:focus {
   /*border: 2px solid var(--duck);*/
@@ -41,9 +43,9 @@ form {
   color: black;
   border-radius: 5px;
   cursor: pointer;
-  opacity: 0.2;
-  margin-left: 10px;
-  font-weight: none;
+  opacity: 1;
+  margin-left: 5px;
+  font-weight: 600;
 }
 .qButton {
   text-decoration: none;
@@ -71,40 +73,49 @@ a {
   text-underline-offset: 2px; /* Adjusting underline offset */
   font-size: 16px;
 }
-#buttonContainer {
-  display: flex;
-  justify-content: space-between;
-  gap: 40px;
-  max-width: 250px;
-  margin: 10px auto; /* Adjust margin as needed */
-}
+
 
 #urlDisplay {
   font-size: 24px;
   font-weight: bold;
   margin-left: 10px;
+  
 }
 
 #logoContainer {
   display: flex;
   width: 100px; /* Adjust the width as needed */
-  margin-right: 270px;
+  margin-right: 250px;
 
   align-items: center;
-  margin-bottom: 0px;
+  margin-bottom: 10px;
 }
 
 #qkrsText {
   /*font-size: 24px;*/
   font-weight: bold;
   margin-left: 10px;
+  margin-bottom: 0px;
 }
-#copyIcon {
-  margin-left: 10px;
-  opacity: 0.1;
-  color: var(--sec);
+
+
+#helpButton {
+  position: fixed;
+  top: var(--menu);
+  left: var(--menu);
+  width: var(--question);
+  height: var(--question);
+  background-color: none;
+  border-radius: 99%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  opacity:1;
+  padding: 5px;
 }
-.check-icon {
-  color: green;
-  opacity: 1;
-}
+
+
+
