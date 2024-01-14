@@ -1,4 +1,6 @@
 window.onload = function() {
+  document.getElementById('yourInput').value = '';
+
   document.getElementById('inputField').focus();
 };
 
