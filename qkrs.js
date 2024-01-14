@@ -11,7 +11,9 @@ window.addEventListener('load', resetInputAndFocus);
 function setURLDisplay() {
   const inputField = document.getElementById("inputField");
   const urlDisplay = document.getElementById("urlDisplay");
-  const urlExample = "qk.rs"; // Change this to your desired URL
+  const brandName = 'qk.rs';
+  const tagline = '';
+  const urlExample = `${brandName} ${tagline}`; // Change this to your desired URL
 
   if (inputField.value === "") {
     urlDisplay.textContent = urlExample;
@@ -29,6 +31,7 @@ setURLDisplay();
 const inputField = document.getElementById("inputField");
 const clearInput = document.getElementById("clearInput");
 
+
 inputField.addEventListener("input", function () {
   clearInput.style.display = this.value.trim() !== "" ? "inline-block" : "none";
 });
@@ -36,6 +39,7 @@ inputField.addEventListener("input", function () {
 clearInput.addEventListener("click", function () {
   inputField.value = "";
   clearInput.style.display = "none";
+  suggestions.style.display = "none";
   inputField.focus();
   urlDisplay.textContent = urlExample;
 });
@@ -63,6 +67,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const copyButton = document.getElementById("copyButton");
   const clearButton = document.getElementById("clearButton"); // Added this line
   const urlDisplay = document.getElementById("urlDisplay");
+  
+  suggestionsDiv.style.display = "none"; // Hide suggestions on page load
+
 
   function updateDisplayedUrl(siteCode, remainingLetters) {
     const url = `${siteCode}.qk.rs/${remainingLetters}`;
