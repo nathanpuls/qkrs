@@ -1,3 +1,7 @@
+window.onload = function() {
+  document.getElementById('inputField').focus();
+};
+
 //reset urlDisplay
 
 function setURLDisplay() {
