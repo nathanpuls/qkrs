@@ -1,3 +1,18 @@
+
+
+//const { siteCodeSelect } = window.qkrs;
+
+//siteCodeSelect();
+
+//window.qkrs = window.qkrs || {}; // Create a global namespace
+
+// window.qkrs.testImport = function() {
+// console.log('test import');
+// }
+
+console.log('js1 '+ window.siteCodeValue);
+
+
 function resetInputAndFocus() {
   document.getElementById('inputField').value = '';
   document.getElementById('inputField').focus();
@@ -10,7 +25,8 @@ window.addEventListener('load', resetInputAndFocus);
 
 function setURLDisplay() {
   const inputField = document.getElementById("inputField");
-  const urlDisplay = document.getElementById("urlDisplay");
+const urlDisplay = document.getElementById("urlDisplay");
+  
   const brandName = 'qk.rs';
   const tagline = '';
   const urlExample = `${brandName} ${tagline}`; // Change this to your desired URL
@@ -28,7 +44,7 @@ setURLDisplay();
 
 //end
 
-const inputField = document.getElementById("inputField");
+
 const clearInput = document.getElementById("clearInput");
 
 
@@ -64,8 +80,8 @@ window.addEventListener("pageshow", function (event) {
 document.addEventListener("DOMContentLoaded", function () {
   const inputField = document.getElementById("inputField");
   const goButton = document.getElementById("submitButton");
-  const copyButton = document.getElementById("copyButton");
-  const clearButton = document.getElementById("clearButton"); // Added this line
+  
+  
   const urlDisplay = document.getElementById("urlDisplay");
   
   suggestionsDiv.style.display = "none"; // Hide suggestions on page load
@@ -111,80 +127,39 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  document
-    .getElementById("redirectForm")
-    .addEventListener("submit", function (event) {
-      event.preventDefault();
-      const inputValue = inputField.value.trim();
-      let siteCode = "";
-      let remainingLetters = "";
-
-      if (inputValue.length > 0) {
-        const delimiterIndex = inputValue.indexOf(" ");
-
-        if (delimiterIndex !== -1) {
-          siteCode = inputValue.slice(0, delimiterIndex).trim();
-          remainingLetters = inputValue.slice(delimiterIndex + 1).trim();
-        } else {
-          siteCode = inputValue;
-        }
-
-        if (siteCode.length > 0) {
-          if (remainingLetters.length > 0) {
-            updateDisplayedUrl(siteCode, remainingLetters);
-            window.location.href = `https://${siteCode}.qk.rs/${remainingLetters}`;
-          } else {
-            window.location.href = `https://${siteCode}.qk.rs`;
-          }
-        }
-      }
-
-      console.log("siteCode:", siteCode);
-      console.log("remainingLetters:", remainingLetters);
-    });
-
-  copyButton.addEventListener("click", function () {
+  document.getElementById("redirectForm").addEventListener("submit", function (event) {
+    event.preventDefault();
     const inputValue = inputField.value.trim();
     const delimiterIndex = inputValue.indexOf(" ");
-    inputField.focus();
-
+  
     let siteCode = "";
     let remainingLetters = "";
-
-    if (delimiterIndex !== -1) {
-      siteCode = inputValue.slice(0, delimiterIndex).trim();
-      remainingLetters = inputValue.slice(delimiterIndex + 1).trim();
-    } else {
-      siteCode = inputValue;
+  
+    if (inputValue.length > 0) {
+      // Remove this inner declaration to avoid conflicts
+      // const delimiterIndex = inputValue.indexOf(" ");
+  
+      if (delimiterIndex !== -1) {
+        siteCode = inputValue.slice(0, delimiterIndex).trim();
+        remainingLetters = inputValue.slice(delimiterIndex + 1).trim();
+      } else {
+        siteCode = inputValue;
+      }
+  
+      if (siteCode.length > 0) {
+        if (remainingLetters.length > 0) {
+          updateDisplayedUrl(siteCode, remainingLetters);
+          window.location.href = `https://${siteCode}.qk.rs/${remainingLetters}`;
+        } else {
+          window.location.href = `https://${siteCode}.qk.rs`;
+        }
+      }
     }
-
-    let url = "";
-
-    if (remainingLetters.length > 0) {
-      url = `https://${siteCode}.qk.rs/${remainingLetters}`;
-    } else {
-      url = `https://${siteCode}.qk.rs`;
-    }
-
-    navigator.clipboard
-      .writeText(url)
-      .then(() => {
-        copyButton.textContent = "Copied!";
-        setTimeout(function () {
-          copyButton.textContent = "Copy URL";
-        }, 2000);
-      })
-      .catch((err) => {
-        console.error("Failed to copy:", err);
-      });
+  
+    console.log("siteCode:", siteCode);
+    console.log("remainingLetters:", remainingLetters);
   });
-
-  clearButton.addEventListener("click", function () {
-    inputField.value = "";
-    
-    urlDisplay.textContent = urlExample;
-    inputField.focus();
-  });
+  
 });
 
 const copyIcon = document.getElementById("urlDisplay"); //ID was copyIcon
@@ -227,3 +202,7 @@ copyIcon.addEventListener("click", function () {
       console.error("Failed to copy:", err);
     });
 });
+
+
+
+

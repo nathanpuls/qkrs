@@ -1,5 +1,19 @@
+
+//const { testImport } = window.qkrs;
+//testImport();
+//window.qkrs = window.qkrs || {};
+
+
+
+
+
 //const inputField = document.getElementById("inputField");
 const suggestionsDiv = document.getElementById("suggestions");
+
+
+
+
+let siteCodeValue = '56546';
 
 
 
@@ -118,11 +132,25 @@ document.addEventListener("keydown", function (event) {
     if (highlightedIndex !== -1) {
       const [termFromColumnA] = filteredSuggestions[highlightedIndex].split(" | ");
       inputField.value = termFromColumnA + " ";
+      console.log(termFromColumnA);
+      siteCodeValue = termFromColumnA;
+      siteCodeSelect();
+      
     }
   
   }
 });
 
+function siteCodeSelect() {
+  
+  console.log('scs: ' + siteCodeValue);
+  window.siteCodeValue = siteCodeValue;
+
+
+
+}
+
+//siteCodeSelect();
 
   function updateHighlightedSuggestion() {
     const suggestionElements = document.querySelectorAll(".suggestion-item");
@@ -148,7 +176,9 @@ document.addEventListener("keydown", function (event) {
     suggestionElement.classList.add("suggestion-item");
     suggestionElement.addEventListener("click", function () {
       inputField.value = termFromColumnA;
+      console.log(termFromColumnA);
       inputField.value += " "; // Append a space
+    
       suggestionsDiv.innerHTML = "";
       inputField.focus(); // Set focus to the input field
     });
