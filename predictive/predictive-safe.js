@@ -10,7 +10,7 @@ let siteCodeValue = "56546";
 // Replace with your actual Google Sheets API key
 const API_KEY = "AIzaSyDtBiP0s5TwGX9_G9iMHyke4b1k86JT8i4";
 const spreadsheetId = "1A5oU3WMTWRg8tS2VtJeSmTr7E0tmhfRgUszl9HudCs0";
-const range = "Sheet1!A:E";
+const range = "Sheet1!A:C";
 
 // Function to fetch data from Google Sheets
 async function fetchSuggestions() {
@@ -24,17 +24,12 @@ async function fetchSuggestions() {
 
     const data = await response.json();
     const suggestionsList = data.values
-    ? data.values
-    .slice(1)
-    .map((row) => {
-      const termFromColumnA = row[0] !== undefined ? row[0] : "";
-      const termFromColumnD = row[2] !== undefined ? row[2] : "";
-      
-      const url = row[4] !== undefined ? row[4] : "";
-
-      return `${termFromColumnA} | ${termFromColumnD} | ${url}`;
-    })
-: [];
+      ? data.values
+          .slice(1)
+          .map((row) =>
+            row[0] !== undefined ? `${row[0]} | ${row[2] || ""}` : ""
+          )
+      : [];
 
     return suggestionsList;
   } catch (error) {
@@ -132,22 +127,8 @@ inputField.addEventListener("input", async function () {
   suggestionsDiv.innerHTML = "";
   filteredSuggestions.forEach((suggestion) => {
     const suggestionElement = document.createElement("div");
-    const [termFromColumnA, termFromColumnD, url] = suggestion.split(" | ");
-    const faviconUrl = `https://www.google.com/s2/favicons?domain=${url}&sz=100
-    `;
-    let imageUrl;
-
-if (faviconUrl) {
-  imageUrl = `<img src="${faviconUrl}" alt="" width="15"/>`;
-} else {
-  imageUrl = `<img src="https://qk.rs/duck.jpeg" alt="" width="15"/>`;
-}
-
-    //const imageUrl = faviconUrl ? `<img src="${faviconUrl}" alt="" width="15"/>` : `<img src="https://qk.rs/duck.jpeg" alt="" width="15"/>`;
-
-    suggestionElement.innerHTML = `${imageUrl}<span class="suggestion-code">${termFromColumnA}</span> 
-    <span class="suggestion-separator">=</span> <span class="suggestion-site">${termFromColumnD}</span>`;
-    //suggestionElement.innerHTML = `<strong>${termFromColumnA}</strong> | ${termFromColumnD}`; // option for no favicons
+    const [termFromColumnA, termFromColumnD] = suggestion.split(" | ");
+    suggestionElement.innerHTML = `<strong>${termFromColumnA}</strong> | ${termFromColumnD}`;
     suggestionElement.classList.add("suggestion-item");
     suggestionElement.addEventListener("click", function () {
       inputField.value = termFromColumnA;
