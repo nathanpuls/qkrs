@@ -22,10 +22,14 @@
         var urlString = getParameterByName('url');
 
         // Set the 'url' parameter as the destination for redirection
-        document.getElementById('redirectUrl').content = urlString;
+        if (urlString) {
+            document.getElementById('redirectUrl').content = urlString;
 
-        // Optional: Display a message or perform additional actions
-        console.log('Redirecting to:', urlString);
+            // Optional: Display a message or perform additional actions
+            console.log('Redirecting to:', urlString);
+        } else {
+            console.error('No valid URL parameter found.');
+        }
     </script>
 </body>
 </html>
