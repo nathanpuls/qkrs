@@ -46,7 +46,7 @@ function redirectBasedOnParams() {
                 } else {
                     console.error("Invalid or missing site parameter1");
                     //window.location.href = '../404.html'; //comment out when testing
-                    window.location.href = `${a}.ends.at`;
+                    window.location.href = `${s}.wyr.es`;
                     console.log('1 ' + a);
                 }
             } else {
@@ -56,7 +56,7 @@ function redirectBasedOnParams() {
                 if (!redirectLink || !redirectLink.startsWith('http')) {
                     console.error("Invalid or missing site parameter2");
                     //window.location.href = '../404.html';
-                  window.location.href = `${a}.wyr.es`;
+                  window.location.href = `${s}.ends.at`;
   
                   console.log('2: ' + a)
                 } else {
