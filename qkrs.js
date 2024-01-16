@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function updateDisplayedUrl(siteCode, remainingLetters) {
     const url = `${siteCode}.qk.rs/${remainingLetters}`;
     
-    urlDisplay.textContent = urlExample; // when var is 'url' it's scrunched up - see if CSS can fix later
+    urlDisplay.textContent = 'quack'; //urlExample; // when var is 'url' it's scrunched up - see if CSS can fix later
   }
 
   inputField.addEventListener("input", function () {
