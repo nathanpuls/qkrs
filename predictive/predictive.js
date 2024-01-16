@@ -145,9 +145,10 @@ if (faviconUrl) {
 
     //const imageUrl = faviconUrl ? `<img src="${faviconUrl}" alt="" width="15"/>` : `<img src="https://qk.rs/duck.jpeg" alt="" width="15"/>`;
 
-    suggestionElement.innerHTML = `${imageUrl}<span class="suggestion-code">${termFromColumnA}</span> 
-    <span class="suggestion-separator">=</span> <span class="suggestion-site">${termFromColumnD}</span>`;
-    //suggestionElement.innerHTML = `<strong>${termFromColumnA}</strong> | ${termFromColumnD}`; // option for no favicons
+    //option for favicons
+    // suggestionElement.innerHTML = `${imageUrl}<span class="suggestion-code">${termFromColumnA}</span> 
+    // <span class="suggestion-separator">=</span> <span class="suggestion-site">${termFromColumnD}</span>`;
+    suggestionElement.innerHTML = `<strong>${termFromColumnA}</strong> | ${termFromColumnD}`; // option for no favicons
     suggestionElement.classList.add("suggestion-item");
     suggestionElement.addEventListener("click", function () {
       inputField.value = termFromColumnA;
