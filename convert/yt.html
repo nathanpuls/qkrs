@@ -20,11 +20,24 @@
         // Get the 'url' parameter from the URL
         var urlString = getParameterByName('url');
 
-        // Redirect if a valid URL parameter is found
+        // Process the URL if a valid parameter is found
         if (urlString) {
-            // Optional: Display a message or perform additional actions
-            console.log('Redirecting to:', urlString);
-            window.location.href = urlString;
+            // Split the path and time
+            var parts = urlString.split('+');
+            if (parts.length === 2) {
+                // Combine the parts with "&t="
+                var newPath = parts[0];
+                var newTime = parts[1].replace('&t=', '');
+                var newUrl = newPath + '&t=' + newTime;
+
+                // Optional: Display a message or perform additional actions
+                console.log('Redirecting to:', newUrl);
+
+                // Redirect to the new URL
+                window.location.href = newUrl;
+            } else {
+                console.error('Invalid URL format.');
+            }
         } else {
             console.error('No valid URL parameter found.');
         }
