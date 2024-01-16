@@ -9,8 +9,18 @@
 // window.qkrs.testImport = function() {
 // console.log('test import');
 // }
+// Access the variable from script1.js
+//console.log(window.passTermA);
+//window.passTermB = "Hello from Script qkrs!";
 
-console.log('js1 '+ window.siteCodeValue);
+// document.addEventListener('DOMContentLoaded', function() {
+//   // Access the variable using the window object
+//   console.log(window.passTermA);
+// });
+
+
+
+//console.log('js1 '+ window.siteCodeValue); broken
 
 
 function resetInputAndFocus() {
@@ -87,10 +97,12 @@ document.addEventListener("DOMContentLoaded", function () {
   suggestionsDiv.style.display = "none"; // Hide suggestions on page load
 
 
+  
+
   function updateDisplayedUrl(siteCode, remainingLetters) {
     const url = `${siteCode}.qk.rs/${remainingLetters}`;
     
-    urlDisplay.textContent = url;
+    urlDisplay.textContent = urlExample; // when var is 'url' it's scrunched up - see if CSS can fix later
   }
 
   inputField.addEventListener("input", function () {
@@ -148,7 +160,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
       if (siteCode.length > 0) {
         if (remainingLetters.length > 0) {
-          updateDisplayedUrl(siteCode, remainingLetters);
+          updateDisplayedUrl(siteCode, remainingLetters); // later
           window.location.href = `https://${siteCode}.qk.rs/${remainingLetters}`;
         } else {
           window.location.href = `https://${siteCode}.qk.rs`;
@@ -193,6 +205,7 @@ copyIcon.addEventListener("click", function () {
     .writeText(url)
     .then(() => {
       copyIcon.innerHTML = 'copied!';
+      console.log(url);
       setTimeout(function () {
         copyIcon.innerHTML = url.replace(/^https:\/\//, ''); // old '<i class="far fa-copy"></i>'
         inputField.focus(); // Set focus back to the input field

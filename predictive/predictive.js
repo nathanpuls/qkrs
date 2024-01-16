@@ -5,7 +5,16 @@
 //const inputField = document.getElementById("inputField");
 const suggestionsDiv = document.getElementById("suggestions");
 
-let siteCodeValue = "56546";
+// let siteCodeValue;
+// // Declare a variable in the global scope
+// function setSiteCodeValue(value) {
+//   siteCodeValue = value;
+
+// window.passTermA = "Hello from Script predictive!" + siteCodeValue;
+// console.log(window.passTermA);
+
+// }
+
 
 // Replace with your actual Google Sheets API key
 const API_KEY = "AIzaSyDtBiP0s5TwGX9_G9iMHyke4b1k86JT8i4";
@@ -80,31 +89,55 @@ inputField.addEventListener("input", async function () {
 
   let highlightedIndex = -1;
 
-  document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") {
-      suggestionsDiv.innerHTML = "";
-      suggestionsDiv.style.borderTop = "none";
-      suggestionsDiv.style.display = "none";
-    } else if (event.key === "ArrowDown" || event.key === "ArrowUp") {
-      event.preventDefault();
-      const direction = event.key === "ArrowDown" ? 1 : -1;
-      highlightedIndex = Math.min(
-        Math.max(highlightedIndex + direction, 0),
-        filteredSuggestions.length - 1
-      );
-      updateHighlightedSuggestion();
+  // ... (Your existing code)
 
-      // Update input field immediately when navigating through suggestions
-      if (highlightedIndex !== -1) {
-        const [termFromColumnA] =
-          filteredSuggestions[highlightedIndex].split(" | ");
-        inputField.value = termFromColumnA + " ";
-        console.log(termFromColumnA);
-        siteCodeValue = termFromColumnA;
-        siteCodeSelect();
-      }
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") {
+    suggestionsDiv.innerHTML = "";
+    suggestionsDiv.style.borderTop = "none";
+    suggestionsDiv.style.display = "none";
+  } else if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+    event.preventDefault();
+    const direction = event.key === "ArrowDown" ? 1 : -1;
+    
+    if (highlightedIndex === -1 && direction === -1) {
+      // If at the top and pressing ArrowUp, move to the bottom
+      highlightedIndex = filteredSuggestions.length - 1;
+    } else if (highlightedIndex === filteredSuggestions.length - 1 && direction === 1) {
+      // If at the bottom and pressing ArrowDown, move to the top
+      highlightedIndex = 0;
+    } else {
+      highlightedIndex = (highlightedIndex + direction + filteredSuggestions.length) % filteredSuggestions.length;
     }
-  });
+
+    updateHighlightedSuggestion();
+
+    // Update input field immediately when navigating through suggestions
+    if (highlightedIndex !== -1) {
+      const [termFromColumnA] = filteredSuggestions[highlightedIndex].split(" | ");
+      inputField.value = termFromColumnA + " ";
+      console.log(termFromColumnA);
+      //siteCode = termFromColumnA;
+      updateDisplayedUrl(termFromColumnA);
+      //window.updateDisplayedUrl(termFromColumnA);
+      //siteCodeValue = termFromColumnA;
+      //setSiteCodeValue(siteCodeValue);
+      //siteCodeSelect();
+    }
+  }
+});
+
+function updateDisplayedUrl(siteCode) {
+  const url = `${siteCode}.qk.rs`;
+  
+  urlDisplay.textContent = url;
+}
+
+
+// function updateDisplayedUrl(siteCode) {
+//   console.log('test');
+// }
+
 
   function siteCodeSelect() {
     console.log("scs: " + siteCodeValue);
@@ -154,6 +187,7 @@ if (faviconUrl) {
       inputField.value = termFromColumnA;
       console.log(termFromColumnA);
       inputField.value += " "; // Append a space
+      updateDisplayedUrl(termFromColumnA);
 
       suggestionsDiv.innerHTML = "";
       inputField.focus(); // Set focus to the input field
