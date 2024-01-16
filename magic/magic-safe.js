@@ -45,7 +45,8 @@ function redirectBasedOnParams() {
                     window.location.href = redirectRow.redirectUrl;
                 } else {
                     console.error("Invalid or missing site parameter");
-                    //window.location.href = '../404.html'; //comment out when testing
+                    window.location.href = '../404.html'; //comment out when testing
+                   
                 }
             } else {
                 // If 'a' is not empty, use the existing logic
