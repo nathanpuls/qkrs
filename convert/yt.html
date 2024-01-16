@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0;url=" id="redirectUrl">
     <title>YouTube Timestamp</title>
 </head>
 <body>
@@ -21,12 +20,11 @@
         // Get the 'url' parameter from the URL
         var urlString = getParameterByName('url');
 
-        // Set the 'url' parameter as the destination for redirection
+        // Redirect if a valid URL parameter is found
         if (urlString) {
-            document.getElementById('redirectUrl').content = urlString;
-
             // Optional: Display a message or perform additional actions
             console.log('Redirecting to:', urlString);
+            window.location.href = urlString;
         } else {
             console.error('No valid URL parameter found.');
         }
