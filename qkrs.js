@@ -22,6 +22,12 @@
 
 //console.log('js1 '+ window.siteCodeValue); broken
 
+//yet another autofocus
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('inputField').focus();
+});
+
+
 
 function resetInputAndFocus() {
   document.getElementById('inputField').value = '';

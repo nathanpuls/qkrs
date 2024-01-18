@@ -13,6 +13,10 @@ body {
   flex-direction: column;
   text-align: center;
 }
+#duck {
+  height: 40px;
+  width: 40px;
+}
 #tagline {
 font-size: 14px;
 position: fixed;
@@ -114,10 +118,10 @@ a {
 }
 
 
-#menuBtn {
+#openModal {
   position: fixed;
   top: 20px;
-  left: 20px;
+  right: 20px;
   width: 25px;
   height: 25px;
   background-color: none;

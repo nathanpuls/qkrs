@@ -9,11 +9,12 @@
     />
     <link rel="stylesheet" href="qkrs.css" />
     <link rel="stylesheet" href="./predictive/predictive.css">
+    <link rel="stylesheet" href="./modal/modal.css">
     
   </head>
   <body>
     <div id="logoContainer">
-      <img src="https://qk.rs/duck.jpeg" alt="QK logo" height="40" width="40" />
+      <img src="https://qk.rs/duck.jpeg" alt="QK logo" id="duck" />
       <span id="urlDisplay">qk.rs</span>
 
 
@@ -67,9 +68,26 @@
 
 
 
-    <a href="./cheatsheet/" id="menuBtn"><i class="fas fa-bars" ></i></a>
+    <div id="openModal"><i class="fas fa-bars" ></i></div>
 
-
+<!-- Modal container -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="closeModal">&times;</span>
+    
+    <div class="modal-header">
+        <img src="https://qk.rs/duck.png" alt="quack" id="duck">
+        <h3 class="modal-header"></h3>
+    </div>
+    <ul class="menu-list">
+      <li><a href="./cheatsheet">Cheat Sheet</a></li>
+      <li><a href="./tools">Tools</a></li>
+      
+    <p>Email: x [at] qk.rs</p>
+      <!-- Add more links as needed -->
+    </ul>
+  </div>
+</div>
 
 
 
@@ -77,6 +95,7 @@
     <script src="qkrs.js"></script>
     <script src="./predictive/predictive.js"></script>
     <script src="focus.js"></script>
+    <script src="modal/modal.js"></script>
     
     <!--<script src="./qkrs-placeholder.js"></script>-->
     
