@@ -28,26 +28,13 @@ function redirectBasedOnParams() {
 
             if (data.values && data.values.length > 0) {
                 data.values.forEach(row => {
-                    const valueA = row[0] || ''; // column A - site code
-                    const valueD = row[3] || ''; // column D - site name
+                    const key = row[0] || '';
+                    const value = row[1] || '';
+                    const redirectUrl = row[4] || '';
 
-                    // Check if parameter 's' matches either column A or column D
-                    if (s === valueA || s === valueD) {
-                        const keyA = valueA;
-                        const keyD = valueD;
-                        const value = row[1] || '';
-                        const redirectUrl = row[4] || '';
-
-                        if (keyA) {
-                            redirectionRules[keyA] = { value, redirectUrl };
-                        }
-
-                        if (keyD) {
-                            redirectionRules[keyD] = { value, redirectUrl };
-                        }
-                    }
+                    redirectionRules[key] = { value, redirectUrl };
                 });
-            }
+            } 
 
             // Check if parameter 'a' is empty or not
             if (!a) {
