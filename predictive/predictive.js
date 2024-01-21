@@ -139,10 +139,10 @@ function updateDisplayedUrl(siteCode) {
 // }
 
 
-  function siteCodeSelect() {
-    console.log("scs: " + siteCodeValue);
-    window.siteCodeValue = siteCodeValue;
-  }
+  // function siteCodeSelect() {
+  //   console.log("scs: " + siteCodeValue);
+  //   window.siteCodeValue = siteCodeValue;
+  // }
 
   //siteCodeSelect();
 

@@ -1,3 +1,10 @@
+// Event listener for Escape key
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") {
+      closeModal();
+      toggleMenu();
+  }
+});
 document.getElementById('openModal').addEventListener('click', function() {
     document.getElementById('modal').style.display = 'block';
   });
@@ -16,11 +23,22 @@ document.getElementById('openModal').addEventListener('click', function() {
   function closeModal() {
     document.getElementById("modal").style.display = "none";
 }
+function openModal() {
+  document.getElementById("modal").style.display = "block";
+}
 
-// Event listener for Escape key
-document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") {
-        closeModal();
-    }
-});
+
   
+// hamburger menu
+
+
+
+function toggleMenu() {
+  const menuButton = document.querySelector('.hamburger-menu');
+  menuButton.classList.toggle('change');
+  if (menuButton.classList.contains('change')) {
+    openModal();
+  } else {
+    closeModal();
+  }
+}

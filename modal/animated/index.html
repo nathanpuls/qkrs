@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animated Hamburger Menu</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .hamburger-menu {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    .hamburger-menu .bar {
+      width: 35px;
+      height: 2px;
+      background-color: #333;
+      margin: 6px 0;
+      transition: 0.4s;
+    }
+
+    .change .bar:nth-child(1) {
+      transform: rotate(-45deg) translate(-5px, 6px);
+      width: 35px;
+    }
+
+    .change .bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .change .bar:nth-child(3) {
+      transform: rotate(45deg) translate(-5px, -6px);
+      width: 35px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="hamburger-menu" onclick="toggleMenu()">
+  <div class="bar"></div>
+  <div class="bar"></div>
+  <div class="bar"></div>
+</div>
+
+<script>
+  function toggleMenu() {
+    const menuButton = document.querySelector('.hamburger-menu');
+    menuButton.classList.toggle('change');
+  }
+</script>
+
+</body>
+</html>
