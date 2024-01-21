@@ -44,7 +44,7 @@ form {
 #inputField {
   padding: 10px;
   font-size: 16px;
-  width: 400px;
+  width: 400px; /*desktop*/
   
   border-radius: 5px;
   border: 1px solid #ccc;
@@ -62,10 +62,11 @@ form {
 
 /* Media query for mobile devices */
 @media (max-width: 767px) {
-  input {
+  #inputField {
     width: 250px;
   }
 }
+
 #submitButton {
   padding: 10px 20px;
   
@@ -120,6 +121,7 @@ a {
   display: flex;
   width: 100px; /* Adjust the width as needed */
   margin-right: 400px;
+  margin-left: 50px;
 
   align-items: center;
   margin-bottom: 10px;
