@@ -119,7 +119,7 @@ a {
 #logoContainer {
   display: flex;
   width: 100px; /* Adjust the width as needed */
-  margin-right: 250px;
+  margin-right: 400px;
 
   align-items: center;
   margin-bottom: 10px;
