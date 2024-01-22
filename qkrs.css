@@ -44,7 +44,7 @@ form {
 #inputField {
   padding: 10px;
   font-size: 16px;
-  width: 400px; /*desktop*/
+  width: 250px;
   
   border-radius: 5px;
   border: 1px solid #ccc;
@@ -120,8 +120,7 @@ a {
 #logoContainer {
   display: flex;
   width: 100px; /* Adjust the width as needed */
-  margin-right: 400px;
-  margin-left: 50px;
+  
 
   align-items: center;
   margin-bottom: 10px;
