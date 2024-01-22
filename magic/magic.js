@@ -30,6 +30,7 @@ function redirectBasedOnParams() {
                 data.values.forEach(row => {
                     const valueA = row[0] || ''; // column A - site code
                     const valueD = row[3] || ''; // column D - site name
+                    const websiteCount = row[13] || ''; // column N - website count
 
                     // Check if parameter 's' matches either column A or column D
                     if (s === valueA || s === valueD) {
@@ -58,7 +59,11 @@ function redirectBasedOnParams() {
                     window.location.href = redirectRow.redirectUrl;
                 } else {
                     console.error("Invalid or missing site parameter");
-                    window.location.href = '../404.html'; //comment out when testing
+                   
+                    
+                   window.location.href = `https://www.google.com/search?q=${s}`;
+                   
+                   // window.location.href = '../404.html'; //comment out when testing
                    
                 }
             } else {

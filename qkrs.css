@@ -1,7 +1,10 @@
 :root {
-  --duck: #ffd700;
+  --duck: #FCC75D; /*#ffd700;*/ /*old link: #fbcc5c */ /* REAL #FCC75D */
+  --duck-mild: #ffdfa0;
   --duck-dim: #faf4d1;
   --sec: black;
+  --sky: #c2ecfd;
+
   
 }
 
@@ -72,7 +75,7 @@ form {
   
   font-size: 16px;
   border: none;
-  background-color: #fbcc5c;
+  background-color: var(--duck);
   color: black;
   border-radius: 5px;
   cursor: pointer;
@@ -82,7 +85,7 @@ form {
 }
 .qButton {
   text-decoration: none;
-  background-color: rgba(251, 204, 92, 0.7);
+  background-color: var(--duck);/*rgba(251, 204, 92, 0.7);*/
   border: var(--duck);
   color: black;
   display: block;
@@ -97,7 +100,7 @@ form {
 a {
   text-decoration: underline;
   background-color: none; /*rgba(251, 204, 92, 0.7);*/
-  text-decoration-color: #fbcc5c;
+  text-decoration-color: var(--duck);
   padding: 5px 10px;
   color: black;
   display: block;
