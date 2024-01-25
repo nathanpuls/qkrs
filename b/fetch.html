@@ -1,0 +1,46 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSONLink API Example</title>
+    <script>
+        async function fetchUrlTitle() {
+            const apiKey = 'pk_c8e310797a56748b3749d6118e0bddf22c09713e'; // Replace with your actual API key
+            const urlInput = document.getElementById('urlInput').value;
+            const apiUrl = `https://jsonlink.io/api/extract?url=${encodeURIComponent(urlInput)}&api_key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl);
+
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.status} - ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                
+                // Extract title from the JSON response
+                const title = data.title || 'cant';
+                console.log(title);
+
+                // Display the title in a div
+                document.getElementById('resultDiv').innerText = `${title}`;
+            } catch (error) {
+                console.error('An error occurred:', error);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>JSONLink API Example</h1>
+    <form onsubmit="event.preventDefault(); fetchUrlTitle();">
+        <label for="urlInput">Enter URL:</label>
+        <input type="text" id="urlInput" required>
+        <button type="submit">Fetch Title</button>
+    </form>
+    <div id="resultDiv"></div>
+</body>
+</html>
+

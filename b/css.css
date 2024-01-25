@@ -1,0 +1,94 @@
+* {
+    font-family: 'Poppins', sans-serif;
+}
+body {
+    margin: 20px;
+}
+button {
+    background-color: white;
+    font-size: 18px;
+    border-width: 1px;
+    border: 1px solid #ddd;
+
+}
+#clearAllButton {
+    color: #ddd;
+    border-color: transparent;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+input {
+    width: 100%;
+    font-size: 18px;
+    border: 1px solid #ddd;
+    border-color: transparent;
+}
+input::placeholder{
+    color: #ddd;
+}
+input:focus {
+    outline: none;
+    border-color: transparent;
+}
+#urlGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.urlItem {
+position: relative;
+display: flex;
+
+padding: 10px;
+border: 1px solid #ddd;
+border-radius: 5px;
+word-break: break-all;
+cursor: pointer;
+font-size: 14px;
+}
+
+
+.favicon {
+margin-right: 10px;
+position: absolute;
+top: -10px;
+left: 10px;
+}
+
+.urlItemContainer {
+flex-grow: 1;
+position: relative;
+margin-left: 30px;
+}
+
+
+.deleteButton {
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 20px;  /* Adjust the size of the circle as needed */
+    height: 20px; /* Adjust the size of the circle as needed */
+    cursor: pointer;
+    color: #ddd;
+    position: absolute;
+    right: -7px;
+    top: 0;
+    transform: translateY(-50%);
+}
+.deleteButton::before,
+.deleteButton::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2px;   /* Adjust the size of the "X" as needed */
+    height: 12px; /* Adjust the size of the "X" as needed */
+    background-color: #ddd;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.deleteButton::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}

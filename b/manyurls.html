@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Parser</title>
+</head>
+<body>
+
+<h2>Enter Links</h2>
+<textarea id="linksInput" rows="10" cols="50"></textarea>
+<br>
+<button onclick="parseLinks()">Submit</button>
+
+<script>
+function parseLinks() {
+    // Get the links input value
+    const linksInput = document.getElementById('linksInput').value;
+
+    // Split the links by any whitespace character
+    const separatedLinks = linksInput.split(/\s+/).map(link => link.trim());
+
+    // Remove any empty links
+    const filteredLinks = separatedLinks.filter(link => link !== '');
+
+    // Join the links with commas
+    const joinedLinks = filteredLinks.join(',');
+
+    // Redirect to the specified URL
+    window.location.href = `https://qk.rs/b/?url=${joinedLinks}`;
+}
+</script>
+
+</body>
+</html>

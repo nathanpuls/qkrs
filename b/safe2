@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookmarks</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            margin: 20px;
+        }
+        button {
+            background-color: white;
+            font-size: 18px;
+            border-width: 1px;
+            border: 1px solid #ddd;
+
+        }
+        #clearAllButton {
+            color: #ddd;
+            border-color: transparent;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+        }
+        input {
+            width: 100%;
+            font-size: 18px;
+            border: 1px solid #ddd;
+            border-color: transparent;
+        }
+        input::placeholder{
+            color: #ddd;
+        }
+        input:focus {
+            outline: none;
+            border-color: transparent;
+        }
+        #urlGrid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .urlItem {
+    position: relative;
+    display: flex;
+    
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    word-break: break-all;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+
+.favicon {
+    margin-right: 10px;
+    position: absolute;
+    top: -10px;
+    left: 10px;
+}
+
+.urlItemContainer {
+    flex-grow: 1;
+    position: relative;
+    margin-left: 30px;
+}
+
+
+.deleteButton {
+    border-color: #ddd;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    color: #ddd;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.nameButton {
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    padding: 5px; /* Adjust the padding to make it smaller */
+    font-size: 12px; /* Adjust the font size */
+    background-color: transparent; /* Set background color */
+    color: #ccc; /* Set text color */
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+
+
+    </style>
+</head>
+<body>
+    <input type="text" id="urlInput" placeholder="Add URL" autofocus onkeydown="handleKeyPress(event)">
+    <!-- <button onclick="addUrl()">Add</button> -->
+    <div id="urlGrid"></div>
+
+    <button id="clearAllButton" onclick="clearAll()">Reset</button>
+
+
+    <script>
+        function clearAll() {
+    const urlGrid = document.getElementById('urlGrid');
+    urlGrid.innerHTML = ''; // Clear all URL items in the grid
+    updateUrlParameters(); // Update URL parameters after clearing
+    document.getElementById('urlInput').value = '';
+    document.getElementById('urlInput').focus();
+}
+
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        function addUrlToGrid(url, title) {
+    const urlGrid = document.getElementById('urlGrid');
+
+    
+
+    // Create URL item
+    const urlItem = document.createElement('div');
+    urlItem.className = 'urlItem';
+    urlItem.onclick = function() {
+        const cleanedUrl = getCleanedUrl(url);
+        window.open(`http://${cleanedUrl}`, '_blank');
+    };
+
+    // Create favicon image
+    const favicon = document.createElement('a');
+    favicon.className = 'favicon';
+    const faviconImage = document.createElement('img');
+    faviconImage.src = `https://www.google.com/s2/favicons?domain=${getDomain(url)}&sz=30`;
+    favicon.appendChild(faviconImage);
+
+    // Create URL text
+    const urlText = document.createElement('span');
+    urlText.className = 'urlText';
+    urlText.textContent = getCleanedUrl(url);
+
+    // Create title text
+    const titleText = document.createElement('span');
+    titleText.className = 'titleText';
+    titleText.textContent = title;
+
+    // Create name button
+    const nameButton = document.createElement('button');
+    nameButton.className = 'nameButton';
+    nameButton.textContent = 'Rename';
+    nameButton.onclick = function(event) {
+        event.stopPropagation(); // Prevent the click event from reaching the parent (urlItem)
+        const newName = prompt('Enter a new name for the link:');
+        if (newName !== null) {
+            // Update URL params with the new name
+            // (You need to implement the updateUrlParams function)
+            updateUrlParams(url, newName);
+            // Display the new name instead of the URL
+            titleText.textContent = newName;
+        }
+    };
+
+    // Create "edit" text
+    const editText = document.createElement('span');
+    editText.className = 'editText';
+    editText.textContent = '';
+    editText.onclick = function(event) {
+        event.stopPropagation(); // Prevent the click event from reaching the parent (urlItem)
+        // Add your edit logic here
+        alert(`Edit ${title}`);
+    };
+
+    // Create delete button
+    const deleteButton = document.createElement('button');
+    deleteButton.className = 'deleteButton';
+    deleteButton.textContent = 'x';
+    deleteButton.onclick = function(event) {
+        event.stopPropagation(); // Prevent the click event from reaching the parent (urlItem)
+        deleteUrl(urlItem);
+    };
+
+    // Append favicon, URL text, title text, name button, "edit" text, and delete button to URL item
+    urlItem.appendChild(favicon);
+    urlItem.appendChild(titleText);
+    urlItem.appendChild(urlText);
+    urlItem.appendChild(nameButton);
+    urlItem.appendChild(editText);
+    urlItem.appendChild(deleteButton);
+
+    // Append URL item to URL grid
+    urlGrid.appendChild(urlItem);
+}
+
+
+function getCleanedUrl(url) {
+    return url.replace(/^(https?:\/\/)?(www\.)?/i, '');
+}
+
+
+        function deleteUrl(urlItem) {
+            urlItem.remove();
+            updateUrlParameters();
+            document.getElementById('urlInput').focus();
+        }
+
+        function initializeUrlsFromParams() {
+            const urlParam = getUrlParameter('url');
+
+            if (urlParam) {
+                const urls = urlParam.split(',');
+
+                urls.forEach(url => {
+                    addUrlToGrid(url);
+                });
+            }
+        }
+
+        function addUrl() {
+    const urlInput = document.getElementById('urlInput');
+    const rawUrls = urlInput.value.trim();
+
+    if (rawUrls !== '') {
+        const urls = rawUrls.split(/[,\s]+/); // Split by commas or spaces
+        urls.forEach(url => {
+            if (url !== '') {
+                addUrlToGrid(url);
+            }
+        });
+
+        updateUrlParameters();
+        urlInput.value = '';
+    }
+}
+
+
+function updateUrlParams(url, newName) {
+    // Get the current URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // Find the index of the URL in the parameters
+    const urlIndex = Array.from(urlParams.keys()).findIndex(key => urlParams.get(key) === url);
+
+    if (urlIndex !== -1) {
+        // Update the name parameter for the corresponding URL
+        const urlKey = Array.from(urlParams.keys())[urlIndex];
+        urlParams.set(`${urlKey}_name`, newName);
+
+        // Update the URL parameter itself
+        urlParams.set(urlKey, newName);
+
+        // Update the browser URL
+        const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+        history.replaceState(null, '', newUrl);
+    }
+}
+
+
+
+
+
+
+        function getDomain(url) {
+    // Remove "http://", "https://", and "www." prefixes
+    const cleanedUrl = url.replace(/^(https?:\/\/)?(www\.)?/i, '');
+    
+    // Extract domain from cleaned URL
+    const match = cleanedUrl.match(/^(?:[^@\n]+@)?([^:\/\n]+)/im);
+    
+    return match ? match[1] : '';
+}
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                addUrl();
+            }
+        }
+
+        window.onload = initializeUrlsFromParams;
+        
+    </script>
+</body>
+</html>
