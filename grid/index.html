@@ -1,33 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap">
 
   <style>
     body {
-      font-family: 'Poppins', sans-serif; /* Set the font-family for the body */
+      font-family: 'Poppins', sans-serif;
+      /* Set the font-family for the body */
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: left;
     }
 
     .container {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
+      justify-content: start-left;
+      margin-left: 30px;
     }
 
     .itemContainer {
-      border: 1px solid #ddd;
+      /*border: 1px solid #ddd;*/
+      border-top: 5px solid #ccc;
+      /*#E6E6FA;*/
       margin: 10px;
       padding: 10px;
       cursor: pointer;
-      width: 160px; /* Set width */
-      height: 160px; /* Set height */
+      width: 160px;
+      /* Set width */
+      height: 160px;
+      /* Set height */
       display: flex;
       flex-direction: column;
+      text-decoration: underline dotted;
     }
 
     .textContainer {
@@ -35,10 +43,9 @@
     }
 
     .titleContainer {
-  font-size: 14px;
-margin-top:0;
-
-}
+      font-size: 14px;
+      margin-top: 0;
+    }
 
     .websiteName {
       color: #666;
@@ -46,95 +53,87 @@ margin-top:0;
     }
 
     .pageNameContainer {
-      text-align: left; !important;
+      text-align: left;
+       !important;
       margin-bottom: 0px;
     }
 
     .pageName {
       font-size: 24px;
       font-weight: bold;
-      text-align: left; !important;
-     
+      text-align: left;
+       !important;
+      margin-left: 40px;
+      color: #404040;
     }
   </style>
 </head>
+
 <body>
 
-<div class="pageNameContainer" id="pageNameContainer"></div>
-  
-<div class="container" id="container"></div>
+  <div class="pageNameContainer" id="pageNameContainer"></div>
 
-<script>
-  // JavaScript code to fetch links from Raindrop.io API
-  var currentURL = window.location.href;
-  var urlParams = new URLSearchParams(window.location.search);
-  var param = urlParams.get("c");
-  const collectionId = param; // testing
-  const apiEndpoint = `https://api.raindrop.io/rest/v1/raindrops/${collectionId}`;
-  const apiEndpointCollection = `https://api.raindrop.io/rest/v1/collection/${collectionId}`;
-  const authToken = "Bearer 0f1d16de-033f-4d92-9a50-e37992ed9b94";
+  <div class="container" id="container"></div>
 
-  const requestOptions = {
-    method: 'GET',
-    headers: new Headers({
-      "Authorization": authToken,
-    }),
-    redirect: 'follow'
-  };
-
-  const pageNameContainer = document.getElementById('pageNameContainer');
-  const contentContainer = document.getElementById('container');
-
-  // Fetch for apiEndpointCollection...
-  fetch(apiEndpointCollection, requestOptions)
-    .then(response => response.json())
-    .then(collectionData => {
-      const collectionTitle = collectionData.item.title;
-
-      const pageName = document.createElement('h1');
-      pageName.classList.add('pageName');
-      document.title = collectionTitle;
-      pageName.textContent = collectionTitle;
-
-      pageNameContainer.appendChild(pageName);
-    })
-    .catch(collectionError => {
-      console.error("Error fetching apiEndpointCollection:", collectionError);
-    });
-
-  // Fetch for apiEndpoint...
-  fetch(apiEndpoint, requestOptions)
-    .then(response => response.json())
-    .then(data => {
-      data.items.forEach(item => {
-        const title = item.title;
-        const link = item.link;
-
-        const itemContainer = document.createElement('div');
-        itemContainer.classList.add('itemContainer');
-
-        const textContainer = document.createElement('div');
-        textContainer.classList.add('textContainer');
-
-        const titleContainer = document.createElement('p');
-        titleContainer.classList.add('titleContainer');
-        titleContainer.textContent = title;
-
-        textContainer.appendChild(titleContainer);
-
-        itemContainer.appendChild(textContainer);
-
-        itemContainer.addEventListener('click', () => {
-          window.open(link, '_blank');
-        });
-
-        contentContainer.appendChild(itemContainer);
+  <script>
+    // JavaScript code to fetch links from Raindrop.io API
+    var currentURL = window.location.href;
+    var urlParams = new URLSearchParams(window.location.search);
+    var param = urlParams.get("c");
+    const collectionId = param; // testing
+    const apiEndpoint = `https://api.raindrop.io/rest/v1/raindrops/${collectionId}`;
+    const apiEndpointCollection = `https://api.raindrop.io/rest/v1/collection/${collectionId}`;
+    const authToken = "Bearer 0f1d16de-033f-4d92-9a50-e37992ed9b94";
+    const requestOptions = {
+      method: 'GET',
+      headers: new Headers({
+        "Authorization": authToken,
+      }),
+      redirect: 'follow'
+    };
+    const pageNameContainer = document.getElementById('pageNameContainer');
+    const contentContainer = document.getElementById('container');
+    // Fetch for apiEndpointCollection...
+    fetch(apiEndpointCollection, requestOptions)
+      .then(response => response.json())
+      .then(collectionData => {
+        const collectionTitle = collectionData.item.title;
+        const pageName = document.createElement('h1');
+        pageName.classList.add('pageName');
+        document.title = collectionTitle;
+        pageName.textContent = collectionTitle;
+        pageNameContainer.appendChild(pageName);
+      })
+      .catch(collectionError => {
+        console.error("Error fetching apiEndpointCollection:", collectionError);
       });
-    })
-    .catch(error => {
-      console.error("Error fetching apiEndpoint:", error);
-    });
-</script>
+    // Fetch for apiEndpoint...
+    fetch(apiEndpoint, requestOptions)
+      .then(response => response.json())
+      .then(data => {
+        data.items.forEach(item => {
+          const title = item.title;
+          const link = item.link;
+          const itemContainer = document.createElement('div');
+          itemContainer.classList.add('itemContainer');
+          const textContainer = document.createElement('div');
+          textContainer.classList.add('textContainer');
+          const titleContainer = document.createElement('p');
+          titleContainer.classList.add('titleContainer');
+          titleContainer.textContent = title;
+          textContainer.appendChild(titleContainer);
+          itemContainer.appendChild(textContainer);
+          itemContainer.addEventListener('click', () => {
+            window.open(link, '_blank');
+          });
+          contentContainer.appendChild(itemContainer);
+        });
+      })
+      .catch(error => {
+        console.error("Error fetching apiEndpoint:", error);
+      });
+  </script>
 
 </body>
+
 </html>
