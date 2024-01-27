@@ -5,32 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ends.at</title>
   <link rel="stylesheet" href="../qkrs.css">
-  <script>
-    window.addEventListener('load', function () {
-      // Get the value of the 'name' parameter from the URL
-      var urlParams = new URLSearchParams(window.location.search);
-      var nameWithDot = urlParams.get('name');
-
-      // Check if the 'name' parameter is present and contains a dot
-      if (nameWithDot && nameWithDot.includes('.')) {
-        // Extract the name after the dot
-        var name = nameWithDot.split('.')[1];
-
-        // Log the extracted name to the console
-        console.log('Extracted name:', name);
-
-        // Redirect to the specified URL
-        window.location.href = 'https://wyr.es/' + name;
-      }
-    });
-  </script>
+  
 </head>
 <body>
+    <a href="/"> <img src="https://qk.rs/duck.png" alt="duck" width="50px"></a>
+
 <h1>About ends.at</h1>
 * = your keyword(s)
 <p>ends.at/* goes directly to DuckDuckGo's first search result <a href="https://ends.at/taylorswift">ends.at/taylorswift</a>Sometimes typos even work.<a href="https://ends.at/taylordwift">ends.at/taylordwift</a></p>
 <p>*.ends.at/* goes to <a href="https://bang.wyr.es">DuckDuckGo !Bang search</a>Over 13,000 connected websites. For example you can do a YouTube search with <a href="http://yt.ends.at/pickleball">yt.ends.at/pickleball</a> </p>
-<p>*.ends.at goes to select short links like New York Times Connections</p>
-<a href="https://cx.ends.at">cx.ends.at</a>
+<p>*.ends.at goes to select short links like New York Times Connections<a href="https://cx.ends.at">cx.ends.at</a></p>
+
+<script src="redirect.js"></script>
 </body>
 </html>
