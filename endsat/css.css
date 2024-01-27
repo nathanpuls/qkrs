@@ -30,6 +30,12 @@ h1 {
   margin-left: 50px;
   margin-top: 40px;
 }
+.bold {
+  font-weight: bold;
+  font-size: 24px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 
 /* Media query for mobile devices */
 @media (max-width: 767px) {
