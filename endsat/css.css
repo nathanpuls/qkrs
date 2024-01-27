@@ -24,7 +24,11 @@ p {
   margin: 5px;
   margin-left: 50px;
 }
-
+.disclaimer {
+  font-style: italic;
+  font-size: 12px;
+  margin-bottom: 20px;
+}
 h1 {
   margin-bottom: 20px;
   margin-left: 50px;
