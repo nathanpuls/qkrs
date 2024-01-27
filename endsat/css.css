@@ -1,4 +1,226 @@
-.small {
-    font-size: 14px;
-    margin: 50px;
+
+p {
+    margin: 5px;
+    margin-left: 50px;
 }
+
+/*qkrs*/
+
+:root {
+    --duck: #FCC75D; /*#ffd700;*/ /*old link: #fbcc5c */ /* REAL #FCC75D */
+    --duck-mild: #ffdfa0;
+    --duck-dim: #faf4d1;
+    --sec: black;
+    --sky: #71c7ec;
+
+  
+    
+  }
+  
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    height: 100vh;
+    margin: 0;
+    font-size: 16px;
+    
+  
+    flex-direction: column;
+    text-align: left;
+    
+  }
+  #duck {
+    height: 40px;
+    width: 40px;
+  }
+  #tagline {
+  font-size: 14px;
+  position: fixed;
+  bottom: 20px;
+  color: #6a6a6a;
+  
+  }
+  h1 {
+    margin-bottom: 20px;
+    margin-left: 50px;
+    margin-top: 40px;
+  }
+  form {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0px;
+  }
+  .input-container {
+    position: relative;
+    text-align: center;
+  }
+  #inputField {
+    padding: 10px;
+    font-size: 16px;
+    width: 250px;
+    
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s; /* Add a transition for smoother change */
+    /*height: 35px; /* Set the height of the input field */
+    margin-top: 0px;
+    
+  }
+  #inputField:focus {
+    /*border: 2px solid var(--duck);*/
+    outline: none; /* Optional: remove the default focus outline */
+    border-width: 1px; /* Ensure the border width stays the same on focus */
+  }
+  
+  
+  /* Media query for mobile devices */
+  @media (max-width: 767px) {
+    #inputField {
+      width: 250px;
+    }
+  }
+  
+
+  
+  a {
+    text-decoration: underline;
+    background-color: none; /*rgba(251, 204, 92, 0.7);*/
+    text-decoration-color: var(--sky);
+    padding: 5px 10px;
+    color: black;
+    display: block;
+    margin-top: 10px;
+    text-decoration-thickness: 2px; /* Adjusting underline thickness */
+    text-underline-offset: 2px; /* Adjusting underline offset */
+    font-size: 16px;
+  }
+  
+  
+
+  
+  #logoContainer {
+    display: flex;
+    width: 100px; /* Adjust the width as needed */
+    
+  
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+
+  
+  
+
+  
+  .poppins-thin {
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+  }
+  
+  .poppins-thin-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+    font-style: italic;
+  }
+  
+  .poppins-extralight {
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+  }
+  
+  .poppins-extralight-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
+    font-style: italic;
+  }
+  
+  .poppins-light {
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+  }
+  
+  .poppins-light-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: italic;
+  }
+  
+  .poppins-regular {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .poppins-regular-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+  }
+  
+  .poppins-medium {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+  }
+  
+  .poppins-medium-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: italic;
+  }
+  
+  .poppins-semibold {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+  }
+  
+  .poppins-semibold-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: italic;
+  }
+  
+  .poppins-bold {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  .poppins-bold-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: italic;
+  }
+  
+  .poppins-extrabold {
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+  }
+  
+  .poppins-extrabold-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+    font-style: italic;
+  }
+  
+  .poppins-black {
+    font-family: "Poppins", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+  }
+  
+  .poppins-black-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 900;
+    font-style: italic;
+  }
+  
+  
