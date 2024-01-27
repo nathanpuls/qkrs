@@ -11,7 +11,7 @@ window.addEventListener('load', function () {
       // Log the extracted name to the console
       console.log('Extracted name:', name);
 
-      // Redirect to the specified URL
-      window.location.href = 'https://wyr.es/' + name;
+      // Change the URL without triggering a page reload
+      window.location.replace('https://wyr.es/' + name);
     }
   });
