@@ -76,7 +76,8 @@ function redirectBasedOnParams() {
                      window.location.href = redirectRow.redirectUrl;
                 } else {
                     console.error("Invalid or missing site parameter");
-                     window.location.href = `https://${s}.wyr.es`;
+                    // window.location.href = `https://${s}.wyr.es`;
+                    window.location.href = `https://qk.rs`;
                 }
             } else {
                 let redirectLink = redirectionRules[s] ? redirectionRules[s].value.replace(/\$/, a) : null;
