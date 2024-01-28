@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect Example</title>
+</head>
+<body>
+
+    <script>
+        // Function to check if the current URL path matches the specified pattern
+        function checkAndRedirect() {
+            var path = window.location.pathname; // Get only the path part of the URL
+            var pattern = /^\/(.*)%20(.*)$/; // Match the path
+
+            var match = path.match(pattern);
+
+            if (match) {
+                var s = match[1];
+                var a = match[2];
+
+                // Log the values of s and a
+                console.log('Value of s:', s);
+                console.log('Value of a:', a);
+
+                // Redirect to the new URL
+                window.location.href = `/magic?s=${s}&a=${a}`;
+            }
+        }
+
+        // Call the function on page load
+        checkAndRedirect();
+    </script>
+
+</body>
+</html>
