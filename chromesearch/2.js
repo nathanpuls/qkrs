@@ -73,20 +73,20 @@ function redirectBasedOnParams() {
                 const redirectRow = redirectionRules[s];
                 if (redirectRow && redirectRow.redirectUrl && redirectRow.redirectUrl.startsWith('http')) {
                     console.log('Redirecting to:', redirectRow.redirectUrl);
-                    // window.location.href = redirectRow.redirectUrl;
+                     window.location.href = redirectRow.redirectUrl;
                 } else {
                     console.error("Invalid or missing site parameter");
-                    // window.location.href = `https://${s}.wyr.es`;
+                     window.location.href = `https://${s}.wyr.es`;
                 }
             } else {
                 let redirectLink = redirectionRules[s] ? redirectionRules[s].value.replace(/\$/, a) : null;
 
                 if (!redirectLink || !redirectLink.startsWith('http')) {
                     console.error("Invalid or missing site parameter");
-                    // window.location.href = `https://www.google.com/search?q=${s}+${a}`;
+                     window.location.href = `https://www.google.com/search?q=${s}+${a}`;
                 } else {
                     console.log('Redirecting to:', redirectLink);
-                    // window.location.href = redirectLink;
+                     window.location.href = redirectLink;
                 }
             }
         })
