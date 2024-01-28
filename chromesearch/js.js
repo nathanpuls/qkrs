@@ -13,7 +13,7 @@ function getParameterByName(name, url) {
 
 function checkAndLogValues() {
     console.log('Checking and logging values...');
-    var searchParam = getParameterByName('search');
+    var searchParam = getParameterByName('q');
 
     if (searchParam) {
         console.log('Search parameter found:', searchParam);
