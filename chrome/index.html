@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-BSR2WENW2C"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-BSR2WENW2C");
+    </script>
+    <title>Google Chrome Search Shortcut</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link rel="stylesheet" href="https://qk.rs/qkrs.css" />
+
+    <style>
+      
+
+      .copyContainer {
+        display: inline-block; /* Set display to inline-block */
+        margin-bottom: 10px;
+      }
+      .textToCopy {
+        margin-right: 10px;
+        display: inline-block; /* Set display to inline-block */
+        font-weight: bold;
+      }
+      .copyButton {
+        padding: 10px;
+        width: 150px;
+        cursor: pointer;
+        display: inline-block; /* Set display to inline-block */
+        background-color: var(--duck);
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+      }
+      .google {
+        color: #3c3c3c;
+        font-family: Roboto;
+        background-color: white;
+      }
+      .googleBtn {
+        color: #4285f4;
+        border: 1px solid #4285f4; /* You can customize the border style */
+        padding: 5px 20px;
+        border-radius: 30px;
+        font-family: Roboto;
+        
+      }
+      .bold {
+        font-weight: bold;
+        font-family: Poppins;
+        color: black;
+      }
+      .instruct {
+        font-size: 20px;
+        /* background-color: rgb(255, 253, 239); */
+        padding: 3px 0px;
+        border-radius: 10px;
+        margin: 0 5px;
+        font-weight: 200;
+      }
+      .engine {
+        
+        border: #000000;
+        text-align: left;
+        border-width: 2px;
+        border-style: outset;
+        border-radius: 5px;
+        padding: 20px;
+        
+      }
+    .margin-btm {
+        margin-bottom: 40px;
+    }
+      .main-container {
+        text-align: left;
+      }
+  
+    </style>
+  </head>
+  <body>
+    <div><a href="/"><img src="https://qk.rs/duck.png" alt="duck" width="50px"></a>
+    <h1>Add Google Chrome Search Shortcut</h1>
+    </div>
+   <div class="main-container">
+    <p class="instruct">
+      1) Copy and paste the Chrome link below into a new tab's address bar
+    </p>
+
+    <div class="copyContainer">
+      <p class="textToCopy">chrome://settings/searchEngines</p>
+      <button class="copyButton" onclick="copyToClipboard()">Copy</button>
+    </div>
+
+    <div>
+        <span class="instruct">
+           2) To the right of </span><span class="google">Site search</span><span class="instruct"> click </span>
+          <span class="googleBtn">Add</span>
+    </div>
+
+    <br>
+    <p class="instruct"> 3) Enter the fields as shown:</p>
+    <br>
+   
+    <div class="engine">
+        <p class="google margin-btm">Search engine: <span class="bold">qk.rs</span></p>
+        
+        <p class="google">Shortcut: <span class="bold">q</span></p>
+        <div class="copyContainer">
+          <p class="google">URL with %s in place of query:</p>
+          <p class="textToCopy text2">https://qk.rs/search/?q=%s</p>
+          <button class="copyButton btn2" onclick="copyToClipboard2()">Copy</button>
+        </div>
+    </div>
+
+</div>
+
+    <script>
+      function copyToClipboard() {
+        // Get the text from the paragraph
+        var textToCopy = document.querySelector(".textToCopy").innerText;
+
+        // Create a temporary textarea element
+        var tempTextarea = document.createElement("textarea");
+        tempTextarea.value = textToCopy;
+
+        // Append the textarea to the body
+        document.body.appendChild(tempTextarea);
+
+        // Select the text in the textarea
+        tempTextarea.select();
+
+        // Copy the selected text
+        document.execCommand("copy");
+
+        // Remove the temporary textarea
+        document.body.removeChild(tempTextarea);
+
+        // Change button text to "Copied!" and reset after 2 seconds
+        var copyButton = document.querySelector(".copyButton");
+        copyButton.innerHTML = "Copied!";
+        setTimeout(function () {
+          copyButton.innerHTML = "Copy";
+        }, 2000);
+      }
+
+      // 2
+
+      function copyToClipboard2() {
+        // Get the text from the paragraph
+        var textToCopy = document.querySelector(".text2").innerText;
+
+        // Create a temporary textarea element
+        var tempTextarea = document.createElement("textarea");
+        tempTextarea.value = textToCopy;
+
+        // Append the textarea to the body
+        document.body.appendChild(tempTextarea);
+
+        // Select the text in the textarea
+        tempTextarea.select();
+
+        // Copy the selected text
+        document.execCommand("copy");
+
+        // Remove the temporary textarea
+        document.body.removeChild(tempTextarea);
+
+        // Change button text to "Copied!" and reset after 2 seconds
+        var copyButton = document.querySelector(".btn2");
+        copyButton.innerHTML = "Copied!";
+        setTimeout(function () {
+          copyButton.innerHTML = "Copy";
+        }, 2000);
+      }
+    </script>
+  </body>
+</html>
