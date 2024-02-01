@@ -32,8 +32,12 @@ function saveText() {
       }, 2 * 60 * 1000);
       //document.getElementById('textInput').value = '';
       var shareCodeDiv = document.getElementById("shareCode");
-      shareCodeDiv.innerText = textID;
+      shareCodeDiv.innerText = `Your code is: ${textID}`;
       console.log(textID);
+      var form = document.getElementById('form'); 
+      form.classList.add('formHidden');
+      
+
     });
   } else {
     // Optionally, provide feedback or take action when the input is empty
@@ -62,7 +66,9 @@ function retrieveText() {
   var inputElement = document.getElementById("textInput");
   inputElement.value = "";
   var textRef = database.ref("texts/" + codeInput);
-  hideShareCode();
+  //hideShareCode();
+  var form = document.getElementById('form'); 
+      form.classList.add('formHidden');
 
   textRef
     .get()
@@ -81,6 +87,7 @@ function retrieveText() {
 
           // Make URLs clickable after updating the content
           makeUrlsClickable();
+          
         } else {
           console.log("Text has expired and cannot be retrieved.");
         }
@@ -116,7 +123,7 @@ function generateRandomID() {
   }
 
   // Take the first 4 digits to form the ID
-  var randomID = digits.slice(0, 1).join(""); // we want 4
+  var randomID = digits.slice(0, 4).join(""); // we want 4
 
   // Check if the ID is already used, generate a new one if needed
   while (usedIDs.has(randomID)) {

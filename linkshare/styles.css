@@ -72,3 +72,14 @@ a {
     
   }
  
+  #form {
+    transition: opacity 0.5s ease-out, height 0.5s ease-out, margin 0.5s ease-out;
+  }
+  
+  .formHidden {
+    opacity: 0;
+    height: 0;
+    margin: 0;
+  }
+  
+  

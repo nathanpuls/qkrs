@@ -19,15 +19,19 @@
 </head>
 <body>
     
-        <h1 class="poppins-regular">Linkshare</h1>
-        <p>Share text easily between devices</p>
-        <p class="poppins-regular tag">1) Share text <br> 2) Enter code to get text</p>
+        <h1 class="poppins-regular">Magic Text</h1>
+        <p>Send text between devices</p>
+        <p class="poppins-regular tag">1) Add text 2) Give code to get text</p>
         <br>
         
-            <textarea id="textInput" class="poppins-regular" placeholder="Enter text or code" autofocus></textarea>
-            <br>
-            <button onclick="saveText()" class="poppins-regular btn">Share Text</button>
-            <button onclick="retrieveText()"class="poppins-regular btn">Send Code</button>
+            <div id="form">
+                <textarea id="textInput" class="poppins-regular" placeholder="Enter text or code" autofocus></textarea>
+                <br>
+                <div class="mainBtns" id="mainBtns">
+                    <button onclick="saveText()" class="poppins-regular btn">Send Text</button>
+                    <button onclick="retrieveText()"class="poppins-regular btn">Give Code</button>
+                </div>
+            </div>
         
         <br>
 <br>
