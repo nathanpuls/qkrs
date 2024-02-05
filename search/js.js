@@ -1,5 +1,5 @@
 // Declare s and a outside the functions
-let s, a;
+let s, a, searchParam;
 
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
@@ -84,7 +84,7 @@ function redirectBasedOnParams() {
 
                 if (!redirectLink || !redirectLink.startsWith('http')) {
                     console.error("Invalid or missing site parameter");
-                     window.location.href = `https://www.google.com/search?q=${s}+${a}`;
+                     window.location.href = `https://www.google.com/search?q=${searchParam}`;
                 } else {
                     console.log('Redirecting to:', redirectLink);
                      window.location.href = redirectLink;
