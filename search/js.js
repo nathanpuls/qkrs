@@ -13,7 +13,7 @@ function getParameterByName(name, url) {
 
 function checkAndLogValues() {
     console.log('Checking and logging values...');
-    var searchParam = getParameterByName('q');
+    searchParam = getParameterByName('q');
 
     if (searchParam) {
         console.log('Search parameter found:', searchParam);
@@ -84,7 +84,9 @@ function redirectBasedOnParams() {
 
                 if (!redirectLink || !redirectLink.startsWith('http')) {
                     console.error("Invalid or missing site parameter");
-                     window.location.href = `https://www.google.com/search?q=${searchParam}`;
+                    console.log('sp: ' + searchParam);
+                   window.location.href = `https://www.google.com/search?q=${searchParam}`;
+                    
                 } else {
                     console.log('Redirecting to:', redirectLink);
                      window.location.href = redirectLink;
