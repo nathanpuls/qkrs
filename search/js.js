@@ -17,21 +17,24 @@ function checkAndLogValues() {
 
     if (searchParam) {
         console.log('Search parameter found:', searchParam);
-
+    
         // Use decodeURIComponent to handle URL-encoded characters
         var decodedParam = decodeURIComponent(searchParam);
-
+    
         // Split the decodedParam into s and a
-        [s, a] = decodedParam.split(' ');
+        var splitParams = decodedParam.split(' ');
+        s = splitParams.shift(); // Take the first element as 's'
+        a = splitParams.join(' '); // Join the remaining elements as 'a'
+    
         console.log('a26: ' + a);
-
+    
         // Log the values of s and a
         console.log('Value of s:', s);
         console.log('Value of a:', a);
     } else {
         console.log('No search parameter found.');
     }
-}
+}    
 
 function redirectBasedOnParams() {
     // Use s and a directly
@@ -76,7 +79,8 @@ function redirectBasedOnParams() {
                      window.location.href = redirectRow.redirectUrl;
                 } else {
                     console.error("Invalid or missing site parameter");
-                    window.location.href = `https://${s}.wyr.es`;
+                   //TESTING
+                     window.location.href = `https://${s}.wyr.es`;
                     //window.location.href = `https://qk.rs`;
                 }
             } else {
@@ -89,6 +93,7 @@ function redirectBasedOnParams() {
                     
                 } else {
                     console.log('Redirecting to:', redirectLink);
+                    //TESTING
                      window.location.href = redirectLink;
                 }
             }
