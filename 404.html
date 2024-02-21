@@ -1,12 +1,22 @@
 <script>
+
   // Get the current URL path
   var currentUrlPath = window.location.pathname;
+  console.log(currentUrlPath);
   currentUrlPath = currentUrlPath.toLowerCase();
-  
+  console.log(currentUrlPath);
+
+  // Get the last segment of the URL path
+  var segments = currentUrlPath.split('/');
+  var lastSegment = segments[segments.length - 1];
+  console.log(lastSegment);
+
   // Redirect to Google search page with the current URL path
   window.onload = function() {
-    var googleSearchUrl = 'https://www.google.com/search?q=' + encodeURIComponent(currentUrlPath);
-    //window.location.href = googleSearchUrl;
-    console.log(googleSearchUrl);
+    var googleLuckySearch = `https://www.google.com/search?q=${encodeURIComponent(currentUrlPath)}&btnI`; 
+    window.location.href = googleLuckySearch;
+    console.log(googleLuckySearch);
   };
+
+
 </script>
