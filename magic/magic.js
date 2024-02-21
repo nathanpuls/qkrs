@@ -73,7 +73,9 @@ function redirectBasedOnParams() {
                 if (!redirectLink || !redirectLink.startsWith('http')) {
                     console.error("Invalid or missing site parameter");
 
-                    window.location.href = `https://www.google.com/search?q=${s}+${a}`; // two params present
+                    s2 = encodeURIComponent(s);
+                    a2 = encodeURIComponent(a);
+                    window.location.href = `https://www.google.com/search?q=${s2}+${a2}`; // two params present
                    // window.location.href = '../404.html';
                 } else {
                     console.log(redirectLink);
