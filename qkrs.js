@@ -162,14 +162,17 @@ document.addEventListener("DOMContentLoaded", function () {
         siteCode = inputValue.slice(0, delimiterIndex).trim();
         remainingLetters = inputValue.slice(delimiterIndex + 1).trim();
       } else {
-        siteCode = inputValue;
+        siteCode = encodeURIComponent(inputValue);
       }
   
       if (siteCode.length > 0) {
         if (remainingLetters.length > 0) {
           updateDisplayedUrl(siteCode, remainingLetters); // later
+          siteCode = encodeURIComponent(siteCode);
+          remainingLetters =encodeURIComponent(remainingLetters);
           window.location.href = `https://${siteCode}.qk.rs/${remainingLetters}`;
         } else {
+          siteCode = encodeURIComponent(siteCode);
           window.location.href = `https://${siteCode}.qk.rs`;
         }
       }
