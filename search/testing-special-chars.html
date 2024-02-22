@@ -1,0 +1,53 @@
+<script>
+const redirectionRules = {a: 'shoes'};
+
+    const specialCharactersRegex = /[!@#$%^&*(),.?":{}|<>]/;
+
+    function hasSpecialCharacters(str) {
+        return specialCharactersRegex.test(str);
+    }
+
+    let a = 'shoes';
+    let s = 'a';
+
+    if (hasSpecialCharacters(a) || hasSpecialCharacters(s)) {
+        a = encodeURIComponent(a);
+        s = encodeURIComponent(s);
+        const googleSearchUrl = `https://www.google.com/search?q=${a}+${s}`;
+        console.log('15 goes to google: ' + googleSearchUrl);
+        // window.location.href = googleSearchUrl;
+    } else {
+        if (!a) {
+            const redirectRow = 'redirectionRules[s]';
+            if (redirectRow && redirectRow.redirectUrl && redirectRow.redirectUrl.startsWith('http')) {
+                console.log('Redirecting to:', redirectRow.redirectUrl);
+                // window.location.href = redirectRow.redirectUrl;
+            } else {
+            
+                // window.location.href = `https://${s}.wyr.es`;
+                console.log('sent to wyr.es');
+            }
+        } else {
+            if (hasSpecialCharacters(a)) {
+                a = encodeURIComponent(a);
+            }
+            console.log(a);
+
+            if (hasSpecialCharacters(s)) {
+                s = encodeURIComponent(s);
+            }
+            console.log(s);
+
+            const redirectLink = redirectionRules[s] ? redirectionRules[s].value.replace(/\$/, a) : null;
+
+            if (!redirectLink || !redirectLink.startsWith('http')) {
+                console.error("Invalid or missing site parameter");
+                console.log('search param: ' + searchParam);
+                // window.location.href = googleSearchUrl;
+            } else {
+                console.log('2nd redirect: ' + redirectLink);
+                // window.location.href = redirectLink;
+            }
+        }
+    }
+</script>
