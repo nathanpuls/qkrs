@@ -1,32 +1,27 @@
 function resetInputAndFocus() {
-  document.getElementById('inputField').value = '';
-  document.getElementById('inputField').focus();
+  document.getElementById("inputField").value = "";
+  document.getElementById("inputField").focus();
 }
 
-// Add an event listener for the window.onload event
-window.addEventListener('load', resetInputAndFocus);
-
-//reset urlDisplay
+window.addEventListener("load", resetInputAndFocus);
 
 function setURLDisplay() {
   const inputField = document.getElementById("inputField");
   const urlDisplay = document.getElementById("urlDisplay");
-  const urlExample = "qk.rs"; // Change this to your desired URL
+
+  const brandName = "qk.rs";
+  const tagline = "";
+  const urlExample = `${brandName} ${tagline}`;
 
   if (inputField.value === "") {
     urlDisplay.textContent = urlExample;
   }
 }
 
-// Event listener to detect input changes
 document.getElementById("inputField").addEventListener("input", setURLDisplay);
 
-// Check if input is empty initially
 setURLDisplay();
 
-//end
-
-const inputField = document.getElementById("inputField");
 const clearInput = document.getElementById("clearInput");
 
 inputField.addEventListener("input", function () {
@@ -36,12 +31,12 @@ inputField.addEventListener("input", function () {
 clearInput.addEventListener("click", function () {
   inputField.value = "";
   clearInput.style.display = "none";
+  suggestions.style.display = "none";
   inputField.focus();
   urlDisplay.textContent = urlExample;
 });
 
 const urlExample = "qk.rs";
-const dim = "0.2";
 
 window.addEventListener("pageshow", function (event) {
   var inputField = document.getElementById("inputField");
@@ -49,12 +44,8 @@ window.addEventListener("pageshow", function (event) {
     event.persisted ||
     (window.performance && window.performance.navigation.type === 2)
   ) {
-    // The page is loaded from the bfcache (Back-Forward Cache)
-    inputField.value = ""; // Clear the input field
-    // Additionally, adjust the opacity of buttons as needed
-    document.getElementById("submitButton").style.opacity = dim;
-    document.getElementById("copyButton").style.opacity = dim;
-    document.getElementById("clearButton").style.opacity = dim;
+    inputField.value = "";
+
     urlDisplay.textContent = urlExample;
   }
 });
@@ -62,18 +53,17 @@ window.addEventListener("pageshow", function (event) {
 document.addEventListener("DOMContentLoaded", function () {
   const inputField = document.getElementById("inputField");
   const goButton = document.getElementById("submitButton");
-  const copyButton = document.getElementById("copyButton");
-  const clearButton = document.getElementById("clearButton"); // Added this line
+
   const urlDisplay = document.getElementById("urlDisplay");
+
+  suggestionsDiv.style.display = "none";
 
   function updateDisplayedUrl(siteCode, remainingLetters) {
     const url = `${siteCode}.qk.rs/${remainingLetters}`;
-    
-    urlDisplay.textContent = url;
   }
 
   inputField.addEventListener("input", function () {
-    console.log("Input event triggered"); // Add this line
+    console.log("Input event triggered");
 
     const inputValue = inputField.value.trim();
 
@@ -81,7 +71,10 @@ document.addEventListener("DOMContentLoaded", function () {
       const delimiterIndex = inputValue.indexOf(" ");
       const remainingLetters =
         delimiterIndex !== -1
-          ? inputValue.slice(delimiterIndex + 1).trim().replace(/\s+/g, '+')
+          ? inputValue
+              .slice(delimiterIndex + 1)
+              .trim()
+              .replace(/\s+/g, "+")
           : "";
 
       if (remainingLetters.length > 0 || delimiterIndex === -1) {
@@ -94,20 +87,11 @@ document.addEventListener("DOMContentLoaded", function () {
             ? `${siteCode}.qk.rs/${remainingLetters}`
             : `${siteCode}.qk.rs`;
 
-        urlDisplay.textContent = displayUrl.toLowerCase(); // urlDisplay to lowercase
-        goButton.style.opacity = "1";
-        copyButton.style.opacity = "1";
-        clearButton.style.opacity = "1";
+        urlDisplay.textContent = displayUrl.toLowerCase();
       } else {
-        goButton.style.opacity = dim;
-        copyButton.style.opacity = dim;
-        clearButton.style.opacity = dim;
         urlDisplay.textContent = urlExample;
       }
     } else {
-      goButton.style.opacity = dim;
-      copyButton.style.opacity = dim;
-      clearButton.style.opacity = dim;
       urlDisplay.textContent = urlExample;
     }
   });
@@ -117,12 +101,12 @@ document.addEventListener("DOMContentLoaded", function () {
     .addEventListener("submit", function (event) {
       event.preventDefault();
       const inputValue = inputField.value.trim();
+      const delimiterIndex = inputValue.indexOf(" ");
+
       let siteCode = "";
       let remainingLetters = "";
 
       if (inputValue.length > 0) {
-        const delimiterIndex = inputValue.indexOf(" ");
-
         if (delimiterIndex !== -1) {
           siteCode = inputValue.slice(0, delimiterIndex).trim();
           remainingLetters = inputValue.slice(delimiterIndex + 1).trim();
@@ -143,54 +127,9 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log("siteCode:", siteCode);
       console.log("remainingLetters:", remainingLetters);
     });
-
-  copyButton.addEventListener("click", function () {
-    const inputValue = inputField.value.trim();
-    const delimiterIndex = inputValue.indexOf(" ");
-    inputField.focus();
-
-    let siteCode = "";
-    let remainingLetters = "";
-
-    if (delimiterIndex !== -1) {
-      siteCode = inputValue.slice(0, delimiterIndex).trim();
-      remainingLetters = inputValue.slice(delimiterIndex + 1).trim();
-    } else {
-      siteCode = inputValue;
-    }
-
-    let url = "";
-
-    if (remainingLetters.length > 0) {
-      url = `https://${siteCode}.qk.rs/${remainingLetters}`;
-    } else {
-      url = `https://${siteCode}.qk.rs`;
-    }
-
-    navigator.clipboard
-      .writeText(url)
-      .then(() => {
-        copyButton.textContent = "Copied!";
-        setTimeout(function () {
-          copyButton.textContent = "Copy URL";
-        }, 2000);
-      })
-      .catch((err) => {
-        console.error("Failed to copy:", err);
-      });
-  });
-
-  clearButton.addEventListener("click", function () {
-    inputField.value = "";
-    clearButton.style.opacity = dim;
-    goButton.style.opacity = dim;
-    copyButton.style.opacity = dim;
-    urlDisplay.textContent = urlExample;
-    inputField.focus();
-  });
 });
 
-const copyIcon = document.getElementById("urlDisplay"); //ID was copyIcon
+const copyIcon = document.getElementById("urlDisplay");
 copyIcon.addEventListener("click", function () {
   const inputValue = document.getElementById("inputField").value.trim();
   const delimiterIndex = inputValue.indexOf(" ");
@@ -208,19 +147,23 @@ copyIcon.addEventListener("click", function () {
 
   if (siteCode.trim() === "") {
     url = "https://qk.rs";
-  } else if (remainingLetters.length > 0) {
-    url = `https://${siteCode}.qk.rs/${remainingLetters}`;
   } else {
-    url = `https://${siteCode}.qk.rs`;
+    url = `https://${siteCode}.qk.rs/${remainingLetters || ""}`;
   }
+
+  url = url
+    .toLowerCase()
+    .replace(/^https:\/\//, "")
+    .replace(/\s+/g, "+");
 
   navigator.clipboard
     .writeText(url)
     .then(() => {
-      copyIcon.innerHTML = 'copied!';
+      copyIcon.innerHTML = "copied!";
+      console.log(url);
       setTimeout(function () {
-        copyIcon.innerHTML = url.replace(/^https:\/\//, ''); // old '<i class="far fa-copy"></i>'
-        inputField.focus(); // Set focus back to the input field
+        copyIcon.innerHTML = url.replace(/^https:\/\//, "");
+        inputField.focus();
       }, 1000);
     })
     .catch((err) => {

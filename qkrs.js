@@ -117,9 +117,18 @@ document.addEventListener("DOMContentLoaded", function () {
         if (siteCode.length > 0) {
           if (remainingLetters.length > 0) {
             updateDisplayedUrl(siteCode, remainingLetters);
-            window.location.href = `https://${siteCode}.qk.rs/${remainingLetters}`;
+            siteCode = encodeURIComponent(siteCode);
+            remainingLetters = encodeURIComponent(remainingLetters);
+            //window.location.href = `https://${siteCode}.qk.rs/${remainingLetters}`;
+            window.location.href = `/search/?q=${siteCode}+${remainingLetters}`;
+            console.log(
+              `1: https://qk.rs/search/?q=${siteCode}+${remainingLetters}`
+            );
           } else {
-            window.location.href = `https://${siteCode}.qk.rs`;
+            siteCode = encodeURIComponent(siteCode);
+            //window.location.href = `https://${siteCode}.qk.rs`;
+            window.location.href = `/search/?q=${siteCode}`;
+            console.log(`2: https://qk.rs/search/?q=${siteCode}`);
           }
         }
       }
