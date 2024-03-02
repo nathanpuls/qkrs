@@ -18,12 +18,12 @@ function checkAndLogValues() {
     console.log('Checking and logging values...');
     searchParam = getParameterByName('q');
 
-    if (/!|@|#|\$|%|\^|&|\*|\(|\)/.test(searchParam)) {
-        console.log('Special found:', searchParam);
-        console.log('off to google');
+    // if (/!|@|#|\$|%|\^|&|\*|\(|\)/.test(searchParam)) {
+    //     console.log('Special found:', searchParam);
+    //     console.log('off to google');
         
        // window.location.href = `https://www.google.com/search?q=${searchParam}`;
-    } else {
+    // } else {
         // Use decodeURIComponent to handle URL-encoded characters
         var decodedParam = decodeURIComponent(searchParam);
         console.log('decode:', decodedParam);
@@ -39,13 +39,18 @@ function checkAndLogValues() {
         console.log('Value of s:', s);
         console.log('Value of a:', a);
     }
-}
+// }
 
 
 
 function redirectBasedOnParams() {
     // Use s and a directly
-    s = s.toLowerCase() || ''; // Make sure s is not null or undefined
+    console.log(s);
+    console.log(a);
+    
+    
+    
+    s = s.toLowerCase() || s || ''; // Make sure s is not null or undefined
     a = a || ''; // Make sure a is not null or undefined
     console.log('a40: ' + a);
 
