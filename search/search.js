@@ -45,7 +45,7 @@ function checkAndLogValues() {
 
 function redirectBasedOnParams() {
     // Use s and a directly
-    s = s || ''; // Make sure s is not null or undefined
+    s = s.toLowerCase() || ''; // Make sure s is not null or undefined
     a = a || ''; // Make sure a is not null or undefined
     console.log('a40: ' + a);
 

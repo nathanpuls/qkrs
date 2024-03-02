@@ -110,6 +110,9 @@ document.addEventListener("DOMContentLoaded", function () {
         if (delimiterIndex !== -1) {
           siteCode = inputValue.slice(0, delimiterIndex).trim();
           remainingLetters = inputValue.slice(delimiterIndex + 1).trim();
+          
+          
+
         } else {
           siteCode = inputValue;
         }
@@ -119,6 +122,8 @@ document.addEventListener("DOMContentLoaded", function () {
             updateDisplayedUrl(siteCode, remainingLetters);
             siteCode = encodeURIComponent(siteCode);
             remainingLetters = encodeURIComponent(remainingLetters);
+            remainingLetters = remainingLetters.replace(/%20/g, "+");
+            
             //window.location.href = `https://${siteCode}.qk.rs/${remainingLetters}`;
             window.location.href = `/search/?q=${siteCode}+${remainingLetters}`;
             console.log(
