@@ -4,3 +4,21 @@ trailer
 weather
 where to watch
 definition
+maps
+lyrics
+recipe
+near me
+ratings
+images
+price
+news
+hours
+restaurant
+showtimes
+cast
+how to
+best
+tutorial
+events
+comparison
+deals
