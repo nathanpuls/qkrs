@@ -75,7 +75,7 @@
         // Fetch phrases from external URL
         async function fetchPhrases() {
             try {
-                const response = await fetch('/phrases.txt');
+                const response = await fetch('phrases.txt');
                 const text = await response.text();
                 const phrases = text.split('\n').filter(line => line.trim() !== ''); // Split by lines and remove empty ones
                 generateSuggestions(phrases);
