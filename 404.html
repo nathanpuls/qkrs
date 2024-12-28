@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404</title>
+    <script>
+        const collectionId = 50979270;
+        const apiEndpoint = `https://api.raindrop.io/rest/v1/raindrops/${collectionId}`;
+        const authToken = "Bearer 0f1d16de-033f-4d92-9a50-e37992ed9b94";
+
+        const requestOptions = {
+            method: "GET",
+            headers: new Headers({
+                Authorization: authToken,
+            }),
+        };
+
+        async function fetchRaindropTopItem() {
+            const response = await fetch(apiEndpoint, requestOptions);
+            const data = await response.json();
+            console.log('Raindrop response:', data); // Log the full response from Raindrop
+
+            // Sort items by lastUpdated (newest first)
+            return data.items.sort((a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated))[0]; // Top sorted by last updated
+        }
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const path = urlParams.get('path'); // Get the 'path' parameter from URL
+            console.log('Path from URL:', path); // Log the 'path' from the query parameter
+
+            if (path) { // If 'path' is present in the URL
+                const topItem = await fetchRaindropTopItem();
+
+                if (topItem) {
+                    const redirectUrl = topItem.link.replace('$', path); // Replace $ with the 'path' from URL
+                    console.log('Redirecting to (with Raindrop top item):', redirectUrl); // Log the constructed redirect URL
+                    window.location.href = redirectUrl;
+                } else {
+                    console.log('No top item found in Raindrop.');
+                    
+                }
+            } else {
+                console.log('No path parameter in the URL.');
+                
+            }
+        });
+    </script>
+</head>
+<body>
+</body>
+</html>
