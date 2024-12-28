@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404</title>
+    <title>Redirector</title>
     <script>
         const collectionId = 50979270;
         const apiEndpoint = `https://api.raindrop.io/rest/v1/raindrops/${collectionId}`;
@@ -27,10 +27,16 @@
 
         document.addEventListener("DOMContentLoaded", async () => {
             const urlParams = new URLSearchParams(window.location.search);
-            const path = urlParams.get('path'); // Get the 'path' parameter from URL
-            console.log('Path from URL:', path); // Log the 'path' from the query parameter
+            let path = urlParams.get('path'); // Get the 'path' parameter from URL query
 
-            if (path) { // If 'path' is present in the URL
+            // If no 'path' in query, extract it from the URL path directly
+            if (!path) {
+                path = window.location.pathname.split('/').pop();
+            }
+
+            console.log('Path from URL:', path); // Log the 'path' from the query parameter or URL path
+
+            if (path) { // If 'path' is found
                 const topItem = await fetchRaindropTopItem();
 
                 if (topItem) {
@@ -39,11 +45,11 @@
                     window.location.href = redirectUrl;
                 } else {
                     console.log('No top item found in Raindrop.');
-                    
+                    document.body.innerHTML = '<p>No items found in Raindrop. Configure it below.</p>';
                 }
             } else {
                 console.log('No path parameter in the URL.');
-                
+                document.body.innerHTML = '<p>No path parameter provided in the URL.</p>';
             }
         });
     </script>
