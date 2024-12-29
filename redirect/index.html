@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>qk.rs</title>
+    <script>
+        const collectionId = 51016926;
+        const apiEndpoint = `https://api.raindrop.io/rest/v1/raindrops/${collectionId}`;
+        const authToken = "Bearer 0f1d16de-033f-4d92-9a50-e37992ed9b94";
+
+        const requestOptions = {
+            method: "GET",
+            headers: new Headers({
+                Authorization: authToken,
+            }),
+        };
+
+        async function fetchRaindropTopItem() {
+            const response = await fetch(apiEndpoint, requestOptions);
+            const data = await response.json();
+            console.log('Raindrop response:', data); // Log the full response from Raindrop
+
+            // Sort items by lastUpdated (newest first)
+            return data.items.sort((a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated))[0]; // Top sorted by last updated
+        }
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            const topItem = await fetchRaindropTopItem();
+
+            if (topItem) {
+                // Remove any occurrences of '$' in the URL link
+                const redirectUrl = topItem.link.replace('$', ''); // Ensure '$' is removed
+                console.log('Redirecting to (with Raindrop top item):', redirectUrl); // Log the constructed redirect URL
+                window.location.href = redirectUrl;
+            } else {
+                console.log('No top item found in Raindrop.');
+                document.body.innerHTML = '<p>No items found in Raindrop. Configure it below.</p>';
+            }
+        });
+    </script>
+</head>
+<body>
+</body>
+</html>
