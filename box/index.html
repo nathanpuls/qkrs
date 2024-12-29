@@ -11,6 +11,7 @@
             margin: 0;
             padding: 0;
             height: 100%;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
         }
 
         body {
@@ -20,7 +21,8 @@
             align-items: center;
             background-color: #ffffff;
             font-family: 'Poppins', sans-serif;
-            overflow: auto; /* Allow scrolling when necessary */
+            overflow-y: auto; /* Allow vertical scrolling when necessary */
+            width: 100%; /* Prevent horizontal scrolling */
         }
 
         #search-box {
@@ -38,7 +40,7 @@
             line-height: 1.4;
             font-weight: 300;
             font-family: 'Poppins', sans-serif;
-            flex-grow: 1; /* Allow the textarea to grow */
+            box-sizing: border-box; /* Prevent content from overflowing */
         }
 
         .actions {
