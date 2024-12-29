@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fullbox</title>
+    <title>Box</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -24,6 +24,7 @@
             overflow-y: auto; /* Allow vertical scrolling when necessary */
             width: 100%;
             padding-bottom: 70px; /* Extra space to prevent buttons from overlapping the text */
+            box-sizing: border-box;
         }
 
         #search-box {
@@ -42,6 +43,7 @@
             font-weight: 300;
             font-family: 'Poppins', sans-serif;
             box-sizing: border-box; /* Prevent content from overflowing */
+            overflow: auto; /* Allow text to overflow within the textarea if needed */
         }
 
         .actions {
@@ -50,6 +52,8 @@
             display: flex;
             gap: 20px;
             z-index: 10;
+            width: 100%;
+            justify-content: center;
         }
 
         .icon-button {
@@ -78,9 +82,7 @@
 
             .actions {
                 bottom: 10px;
-                display: flex;
-                gap: 20px;
-                z-index: 10;
+                gap: 15px;
             }
         }
     </style>
@@ -116,7 +118,7 @@
         // Update document title based on first line of input
         function updateTitle() {
             const firstLine = searchBox.value.split('\n')[0];
-            document.title = firstLine ? firstLine : 'Fullbox';
+            document.title = firstLine ? firstLine : 'Box';
         }
 
         // Event listener for input changes in search box
@@ -134,7 +136,7 @@
         // Clear input button functionality
         clearButton.addEventListener('click', () => {
             searchBox.value = '';
-            document.title = 'Fullbox';
+            document.title = 'Box';
             const newUrl = window.location.origin + window.location.pathname;
             history.pushState(null, '', newUrl);
             searchBox.focus();
