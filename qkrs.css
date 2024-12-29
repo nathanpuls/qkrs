@@ -25,6 +25,19 @@ body {
   height: 40px;
   width: 40px;
 }
+#ducklink {
+  all: unset; /* Resets all styles to default values */
+  display: inline-block; /* Allows the element to be styled and maintain dimensions */
+  cursor: pointer; /* Ensures a pointer cursor for clickable behavior */
+  text-decoration: none; /* Removes underlines */
+  color: inherit; /* Inherits color from parent */
+}
+#ducklink:hover,
+#ducklink:focus {
+  text-decoration: none;
+  outline: none;
+}
+
 #tagline {
 font-size: 14px;
 position: fixed;
