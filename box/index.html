@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fullbox</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #search-box {
+            width: 100%;
+            height: 100%;
+            font-size: 1rem;
+            padding: 20px;
+            margin-left: 40px;
+            border: none;
+            outline: none;
+            box-shadow: none;
+            resize: none;
+            background: transparent;
+            color: #333;
+            line-height: 1.4;
+            font-weight: 300;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .actions {
+            position: absolute;
+            bottom: 20px;
+            display: flex;
+            gap: 20px;
+            z-index: 10;
+        }
+
+        .icon-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #ffffff;
+            border-radius: 50%;
+            cursor: pointer;
+            user-select: none;
+            background-color: #000000;
+        }
+
+        .icon-button:hover {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            #search-box {
+                font-size: 0.8rem;
+            }
+
+            .actions {
+                position: absolute;
+                bottom: 10px;
+                display: flex;
+                gap: 20px;
+                z-index: 10;
+            }
+        }
+    </style>
+</head>
+<body>
+    <textarea id="search-box" autofocus></textarea>
+
+    <div class="actions">
+        <div class="icon-button icon-x" id="clear-input">
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+        <div class="icon-button icon-copy" id="copy-text">
+            <i class="fa-regular fa-copy"></i>
+        </div>
+    </div>
+
+    <script>
+        const searchBox = document.getElementById('search-box');
+        const clearButton = document.getElementById('clear-input');
+        const copyButton = document.getElementById('copy-text');
+
+        // Update search box from URL parameters
+        function updateSearchBoxFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const lines = [];
+            for (const [key, value] of urlParams.entries()) {
+                lines.push(decodeURIComponent(value.replace(/\+/g, ' '))); 
+            }
+            searchBox.value = lines.join('\n');
+            updateTitle();
+        }
+
+        // Update document title based on first line of input
+        function updateTitle() {
+            const firstLine = searchBox.value.split('\n')[0];
+            document.title = firstLine ? firstLine : 'Fullbox';
+        }
+
+        // Event listener for input changes in search box
+        searchBox.addEventListener('input', () => {
+            const lines = searchBox.value.trim().split('\n').map(line => line.trim());
+            const urlParams = new URLSearchParams();
+            lines.forEach((line, index) => {
+                urlParams.set(`line${index + 1}`, line);
+            });
+            const newUrl = `${window.location.origin}${window.location.pathname}?${urlParams.toString()}`;
+            history.pushState(null, '', newUrl);
+            updateTitle();
+        });
+
+        // Clear input button functionality
+        clearButton.addEventListener('click', () => {
+            searchBox.value = '';
+            document.title = 'Fullbox';
+            const newUrl = window.location.origin + window.location.pathname;
+            history.pushState(null, '', newUrl);
+            searchBox.focus();
+        });
+
+        // Copy text button functionality
+        copyButton.addEventListener('click', () => {
+            searchBox.select();
+            document.execCommand('copy');
+        });
+
+        // Handle popstate event (back/forward navigation)
+        window.addEventListener('popstate', updateSearchBoxFromUrl);
+
+        // Initialize on load
+        window.onload = () => {
+            updateSearchBoxFromUrl();
+            searchBox.dispatchEvent(new Event('input')); // Trigger input event to update the URL on load
+        };
+    </script>
+</body>
+</html>
