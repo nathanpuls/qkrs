@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-BSR2WENW2C"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-BSR2WENW2C");
+    </script>
+    <title>qk.rs | Search Quicker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link rel="stylesheet" href="qkrs.css" />
+    <link rel="stylesheet" href="./predictive/predictive.css" />
+    <link rel="stylesheet" href="./modal/modal.css" />
+    
+  </head>
+  <body>
+    <div id="form-container">
+      <div id="logoContainer">
+        <a href="https://qk.rs/redirect">
+        <img
+          src="https://qk.rs/duck.png"
+          alt="QK logo"
+          height="40px"
+          id="duck"
+        />
+    </a>
+        <span id="urlDisplay" class="poppins-regular">qk.rs</span>
+      </div>
+      <!--jan21-->
+
+      <div class="input-container">
+        <form id="redirectForm">
+          <div style="position: relative">
+            <input
+              class="poppins-regular"
+              type="text"
+              id="inputField"
+              placeholder="Enter website and keywords"
+              autocomplete="off"
+              autofocus
+            />
+            <span
+              id="clearInput"
+              style="
+                position: absolute;
+                right: 8px;
+                top: 50%;
+                transform: translateY(-50%);
+                cursor: pointer;
+                display: none;
+              "
+            >
+              <i class="fas fa-times-circle"></i>
+            </span>
+          </div>
+          <button type="submit" id="submitButton" class="poppins-regular">
+            GO
+          </button>
+          <div id="predictive-container">
+            <div id="suggestions" style="display: none"></div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!--<p id="tagline">Search quicker</p>-->
+
+    <!-- <div id="openModal"><i class="fas fa-bars" ></i></div> -->
+
+    <div class="hamburger-menu" onclick="toggleMenu()">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+
+    <!-- Modal container -->
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <!-- <span class="close" id="closeModal">&times;</span> -->
+        <!-- <div class="hamburger-menu close" id="closeModal" onclick="toggleMenu(); closeModal();">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div> -->
+
+        <div class="modal-header">
+          <img
+            src="https://qk.rs/duck.png"
+            alt="quack"
+            height="40px"
+            id="duck"
+          />
+          <h3 class="modal-header"></h3>
+        </div>
+        <ul class="menu-list">
+          <!-- <li><a href="./tools">Tools</a></li> -->
+          <p class="modal-paragraph poppins-regular">
+            <strong>qk.rs</strong> (pronounced “Quackers”) helps you search
+            websites <em>quicker</em>. Connected to
+            <span id="websiteCount"></span> websites and offering user-friendly
+            shortcuts, this platform provides real-time suggestions as you type.
+            Every search includes a shareable link (just click the link above the search box to copy it). Imagine a search
+            for hats on Amazon. Typing "a hats," results in the shareable
+            link: <a href="https://a.qk.rs/hats">a.qk.rs/hats</a> Typing "w" then enter, retrieves local weather
+            information. A comprehensive website cheat sheet is available, outlining all
+            available website options. It’s important to note that <strong>qk.rs</strong>
+            prioritizes user privacy by abstaining from collecting any personal
+            information, and no sign-in is required. What are you
+            waiting for? <em>Search quicker.</em>
+          </p>
+          <br />
+          <li>
+            <a href="./cheatsheet" class="poppins-regular"
+              >Website Cheat Sheet</a
+            >
+          </li>
+          <li>
+            <a href="/chrome">Add our shortcut to Chrome</a>
+          </li>
+
+          <p class="poppins-regular">
+            Want to connect a new website? Email: <strong>x [at] qk.rs</strong>
+          </p>
+          <!-- Add more links as needed -->
+        </ul>
+      </div>
+    </div>
+
+    <script src="qkrs.js"></script>
+    <script src="./predictive/predictive.js"></script>
+    <script src="focus.js"></script>
+    <script src="modal/modal.js"></script>
+    <script src="magic/websiteCount.js"></script>
+
+    <!--<script src="./qkrs-placeholder.js"></script>-->
+  </body>
+</html>
