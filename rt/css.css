@@ -1,65 +1,84 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    
-    height: 100%;
+:root {
+    --icon: #ccc;
+    --bg-icon: none;
+    --icon-right: 5px;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+
+  height: 100%;
 }
 
 body {
-    font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
 }
 
 #textInput {
-    font-family: 'Manrope', sans-serif;
-    width: 95vw; /* Set width to viewport width */
-    height: 100vh; /* Set height to viewport height */
-    padding: 15px;
-    padding-right: 30px;
-    font-size: 24px;
-    border: none;
-    outline: none;
-    resize: none;
-    box-sizing: border-box;
-    text-align: left;
-    /* background-color: red; */
-    overflow: hidden;
-    
+  font-family: "Manrope", sans-serif;
+  width: 95vw;
+  height: 100vh;
+  padding: 15px;
+  padding-right: 35px;
+  font-size: 24px;
+  border: none;
+  outline: none;
+  resize: none;
+  box-sizing: border-box;
+  text-align: left;
+  overflow: hidden;
 }
 
 #textInput::placeholder {
-    color: #aaa;
+  color: #aaa;
 }
 
-#textInput:focus {
-    border-color: #007bff;
-}
 
 #copyButton {
-    position: absolute;
-    top: 80px;
-    right: 10px;
-    background: none;
-    border: none;
-    cursor: pointer;
+  position: absolute;
+  top: 80px;
+  right: var(--icon-right);
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  background-color: var(--bg-icon);
 }
 
 #copyButton img {
-    width: 24px;
-    height: 24px;
+  width: 24px;
+  height: 24px;
 }
 
 #closeButton {
-    position: absolute;
-    top: 20px;
-    right: -4px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    
+  position: absolute;
+  top: 19px;
+  right: var(--icon-right);
+  background: none;
+  border: none;
+  cursor: pointer;
+  background-color: var(--bg-icon);
 }
 
 #closeButton img {
-    width: 40px;
-    height: 40px;
-    
+  width: 24px;
+  height: 24px;
 }
+
+#undoButton {
+    position: absolute;
+    top: 140px;
+    right: var(--icon-right);
+    background: none;
+    border: none;
+    cursor: pointer;
+    background-color: var(--bg-icon);
+    display: none;
+  }
+  
+  #undoButton img {
+    width: 24px;
+    height: 24px;
+  }
