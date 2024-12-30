@@ -1,5 +1,4 @@
 :root {
-    --icon: #ccc;
     --bg-icon: none;
     --icon-right: 5px;
 }
@@ -79,6 +78,22 @@ body {
   }
   
   #undoButton img {
+    width: 24px;
+    height: 24px;
+  }
+
+  #linkButton {
+    position: absolute;
+    top: 200px;
+    right: var(--icon-right);
+    background: none;
+    border: none;
+    cursor: pointer;
+    background-color: var(--bg-icon);
+    display: block;
+  }
+  
+  #linkButton img {
     width: 24px;
     height: 24px;
   }
