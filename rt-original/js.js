@@ -45,12 +45,3 @@ document.getElementById('copyButton').addEventListener('click', function() {
     document.execCommand('copy');
 });
 
-// Select the input/textarea element and the clear button
-const inputElement = document.getElementById('textInput');
-const clearButton = document.getElementById('closeButton');
-
-// Add an event listener to the button
-clearButton.addEventListener('click', () => {
-  inputElement.value = ''; // Clear the input/textarea value
-  inputElement.focus();    // Optional: Set focus back to the input/textarea
-});

@@ -13,8 +13,8 @@ body {
     font-family: 'Manrope', sans-serif;
     width: 95vw; /* Set width to viewport width */
     height: 100vh; /* Set height to viewport height */
-    padding: 15px;
-    padding-right: 30px;
+    padding: 10px;
+    
     font-size: 24px;
     border: none;
     outline: none;
@@ -36,7 +36,7 @@ body {
 
 #copyButton {
     position: absolute;
-    top: 60px;
+    top: 10px;
     right: 10px;
     background: none;
     border: none;
@@ -46,20 +46,4 @@ body {
 #copyButton img {
     width: 24px;
     height: 24px;
-}
-
-#closeButton {
-    position: absolute;
-    top: 20px;
-    right: -4px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    
-}
-
-#closeButton img {
-    width: 40px;
-    height: 40px;
-    
 }
