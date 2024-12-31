@@ -60,6 +60,8 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
+        align-items: center;
+        
       }
 
       .icon-button {
@@ -84,6 +86,11 @@
           font-size: 24px;
         }
       }
+      .favicon {
+        display: block;
+        cursor: pointer;
+      }
+      
     </style>
   </head>
   <body>
@@ -128,7 +135,9 @@
         lines.forEach((line, index) => {
           urlParams.set(`line${index + 1}`, line);
         });
-        const newUrl = `${window.location.origin}${window.location.pathname}?${urlParams.toString()}`;
+        const newUrl = `${window.location.origin}${
+          window.location.pathname
+        }?${urlParams.toString()}`;
         history.pushState(null, "", newUrl);
         updateTitle();
       });
@@ -153,5 +162,6 @@
         searchBox.dispatchEvent(new Event("input"));
       };
     </script>
+    <script src="links.js"></script>
   </body>
 </html>
