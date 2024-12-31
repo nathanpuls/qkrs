@@ -1,4 +1,4 @@
-// const searchBox = document.getElementById("search-box");
+//const searchBox = document.getElementById("search-box");
 const actionsContainer = document.querySelector(".actions");
 
 console.log("Debugging links.js script loaded successfully.");
@@ -25,6 +25,19 @@ const getFaviconUrl = (url) => {
   }
 };
 
+// Function to get the cached favicon
+const getCachedFavicon = (url) => {
+  const cachedFavicon = localStorage.getItem(url);
+  console.log("Retrieved cached favicon for", url, ":", cachedFavicon); // Debugging line
+  return cachedFavicon ? cachedFavicon : null;
+};
+
+// Function to cache the favicon
+const cacheFavicon = (url, faviconData) => {
+  localStorage.setItem(url, faviconData);
+  console.log("Cached favicon for", url); // Debugging line
+};
+
 // Function to update favicons
 const updateFavicons = () => {
   console.log("Updating favicons...");
@@ -40,13 +53,26 @@ const updateFavicons = () => {
   links.forEach((link) => {
     const faviconUrl = getFaviconUrl(link);
     if (faviconUrl) {
-      const linkWrapper = document.createElement("a"); // Create a clickable wrapper
-      linkWrapper.href = link.startsWith("http") ? link : `https://${link}`; // Ensure proper URL format
-    //   linkWrapper.target = "_blank"; 
-      linkWrapper.className = "favicon-link"; // Class for easier cleanup
-
+      const cachedFavicon = getCachedFavicon(faviconUrl);
+      
+      // Create an image element
       const favicon = document.createElement("img");
-      favicon.src = faviconUrl;
+      if (cachedFavicon) {
+        favicon.src = cachedFavicon;
+        console.log("Using cached favicon for", link);
+      } else {
+        favicon.src = faviconUrl;
+        favicon.onload = () => {
+          // Cache the favicon once it is loaded
+          cacheFavicon(faviconUrl, favicon.src);
+          console.log("Cached favicon for", link);
+        };
+        favicon.onerror = () => {
+          console.warn("Favicon failed to load for", link, "using fallback image.");
+          favicon.src = "backuplink/favicon.ico"; // Backup image if favicon fails
+        };
+      }
+
       favicon.alt = "favicon";
       favicon.className = "favicon";
       favicon.style.width = "24px";
@@ -55,13 +81,9 @@ const updateFavicons = () => {
       favicon.style.marginTop = "10px";
       favicon.style.display = "block";
 
-      favicon.onerror = () => {
-        // Handle broken favicon URLs
-        console.warn("Favicon failed to load for", link, "using URL", faviconUrl);
-        //favicon.src = "https://via.placeholder.com/24?text=X";
-        favicon.src = "https://qk.rs/favicon.ico";
-      };
-
+      const linkWrapper = document.createElement("a"); // Create a clickable wrapper
+      linkWrapper.href = link.startsWith("http") ? link : `https://${link}`; // Ensure proper URL format
+      linkWrapper.className = "favicon-link"; // Class for easier cleanup
       linkWrapper.appendChild(favicon); // Add image to anchor
       actionsContainer.appendChild(linkWrapper); // Add to the DOM
       console.log("Appended clickable favicon for", link);
