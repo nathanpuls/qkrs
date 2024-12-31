@@ -105,4 +105,4 @@ window.addEventListener("load", () => {
   updateFavicons();
 });
 
-console.log("Debugging links.js script loaded successfully.");
+console.log("Debugging links.js script loaded so successfully.");
