@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Menninger Blue Theme */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #006F8E; /* Menninger Blue */
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-top: 50px;
+            font-size: 36px;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .link-list {
+            margin-top: 30px;
+        }
+        .link-item {
+            list-style: none;
+            margin: 15px 0;
+        }
+        .link-item a {
+            text-decoration: none;
+            color: white;
+            background-color: #00A9A5; /* A complementary blue shade */
+            padding: 15px 30px;
+            font-size: 24px;
+            border-radius: 5px;
+            display: inline-block;
+            width: 80%;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .link-item a:hover {
+            background-color: #02857B; /* Slightly darker blue for hover */
+            transform: scale(1.05);
+        }
+    </style>
+    <script>
+        const collectionId = 50593298; // Collection ID to fetch
+        const apiEndpoint = `https://api.raindrop.io/rest/v1/raindrops/${collectionId}`;
+        const authToken = "Bearer 0f1d16de-033f-4d92-9a50-e37992ed9b94"; // Ensure token is valid
+
+        const requestOptions = {
+            method: "GET",
+            headers: new Headers({
+                Authorization: authToken,
+            }),
+        };
+
+        async function fetchRaindropItems() {
+            try {
+                const response = await fetch(apiEndpoint, requestOptions);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status} - ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                console.log('Raindrop response:', data); // Log the full response from Raindrop
+
+                // Filter items by the "rn" tag
+                const filteredItems = data.items.filter(item => item.tags.includes("rn"));
+                
+                // Return the filtered items with title and link
+                return filteredItems.map(item => ({
+                    title: item.title,
+                    link: item.link,
+                }));
+            } catch (error) {
+                console.error('Error fetching links:', error);
+                return []; // Return an empty array in case of error
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            const items = await fetchRaindropItems();
+
+            const linkListContainer = document.createElement('div');
+            linkListContainer.classList.add('link-list');
+            
+            if (items.length > 0) {
+                // Create a list and display the titles with the filtered links
+                const list = document.createElement('ul');
+                items.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.classList.add('link-item');
+                    const anchor = document.createElement('a');
+                    anchor.href = item.link;
+                    anchor.textContent = item.title;
+                    listItem.appendChild(anchor);
+                    list.appendChild(listItem);
+                });
+                linkListContainer.appendChild(list);
+            } else {
+                linkListContainer.innerHTML = '<p>No items found with the "rn" tag. Please configure it below.</p>';
+            }
+
+            document.body.appendChild(linkListContainer);
+        });
+    </script>
+</head>
+<body>
+    <h1>RN</h1>
+</body>
+</html>
