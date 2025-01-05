@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pickleball RSVP</title>
+</head>
+<body>
+    <h1>Pickleball RSVP</h1>
+    <h2>Confirmed Players</h2>
+    <ul id="confirmedList"></ul>
+    <h2>Waitlist</h2>
+    <ul id="waitlist"></ul>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const name = urlParams.get('name');
+        const appurl = 'https://script.google.com/macros/s/AKfycbzj1d0yysG7NHYnN8d6Wnheb5UmWSfpqlPlOoQLTErv6c6TyrDcuyxZ9oqx9vkRpTgMFg/exec';
+
+
+        // Send RSVP to Google Apps Script
+        fetch(appurl, {
+            method: 'POST',
+            body: JSON.stringify({ name: name, event_id: 'pb123' }),
+            headers: { 'Content-Type': 'application/json' }
+        }).then(() => {
+            // Fetch updated RSVP list
+            return fetch('YOUR_GOOGLE_APPS_SCRIPT_URL');
+        }).then(response => response.json())
+        .then(data => {
+            const confirmedList = document.getElementById('confirmedList');
+            const waitlist = document.getElementById('waitlist');
+
+            data.confirmed.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item.name;
+                confirmedList.appendChild(li);
+            });
+
+            data.waitlist.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item.name;
+                waitlist.appendChild(li);
+            });
+        });
+    </script>
+</body>
+</html>
