@@ -113,24 +113,13 @@
 
         function addUrlToGrid(url) {
             const urlGrid = document.getElementById('urlGrid');
-            const dotIndex = url.indexOf('.');
-            const isClickable = dotIndex !== -1;
             const urlItem = document.createElement('div');
             urlItem.className = 'urlItem';
-            urlItem.onclick = function () {
-                if (isClickable) {
-                    window.open(`https://l.qk.rs/${url.replace(/\s+/g, '+')}`, '_blank');
-                }
-            };
 
-            if (isClickable) {
-                const favicon = document.createElement('a');
-                favicon.className = 'favicon';
-                const faviconImage = document.createElement('img');
-                faviconImage.src = `https://www.google.com/s2/favicons?domain=${getDomain(url)}&sz=30`;
-                favicon.appendChild(faviconImage);
-                urlItem.appendChild(favicon);
-            }
+            urlItem.onclick = function () {
+                const formattedUrl = `https://l.qk.rs/${encodeURIComponent(url.replace(/\s+/g, '+'))}`;
+                window.open(formattedUrl, '_blank');
+            };
 
             const cleanedUrl = getCleanedUrl(url);
             const urlText = document.createElement('span');
