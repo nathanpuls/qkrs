@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copy This</title>
+
+    <!-- Poppins Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .header {
+            padding: 10px 40px;
+            background: #eaeaea;
+            font-size: 16px;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .copy-all-icon,
+        .clear-icon {
+            cursor: pointer;
+            font-size: 18px;
+            color: #666;
+            transition: color 0.2s ease;
+            position: absolute;
+        }
+
+        .copy-all-icon {
+            left: 10px;
+        }
+
+        .clear-icon {
+            right: 10px;
+        }
+
+        .copy-all-icon:hover,
+        .clear-icon:hover {
+            color: #000;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            flex-grow: 1;
+            padding: 10px 15px;
+        }
+
+        .textbox {
+            width: 100%;
+            height: 100%;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            padding: 0px 0px 0px 50px;
+            line-height: 1.6;
+            resize: none;
+            background: transparent;
+            white-space: pre-wrap;
+            overflow-wrap: break-word;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .copy-icon,
+        .block-icon {
+            position: absolute;
+            margin-top: -38px;
+            cursor: pointer;
+            font-size: 18px;
+            color: #666;
+            transition: color 0.2s ease;
+        }
+
+        .copy-icon {
+            left: 35px;
+        }
+
+        .block-icon {
+            left: 10px;
+        }
+
+        .copy-icon:hover,
+        .block-icon:hover {
+            color: #000;
+        }
+
+        .copied {
+            color: #666 !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <i class="ph ph-copy copy-all-icon" onclick="copyAllText(this)"></i>
+        COPY ALL
+        <i class="ph ph-x clear-icon" onclick="clearText()"></i>
+    </div>
+
+    <div class="container">
+        <textarea class="textbox" id="textbox" oninput="updateIcons()" placeholder="Enter text to make a copyable block. Press return twice to add more blocks. You can copy a block or line" autofocus></textarea>
+    </div>
+
+    <script>
+        // Set block icon class here to change easily
+        let blockIconClass = "ph ph-grid-four block-icon"; // Default icon
+
+        function updateIcons() {
+            // Clean up old icons before regenerating
+            document.querySelectorAll('.copy-icon, .block-icon').forEach(icon => icon.remove());
+
+            const textArea = document.getElementById('textbox');
+            const lines = textArea.value.split("\n");
+
+            const textAreaTop = textArea.getBoundingClientRect().top + window.scrollY;
+            const computedStyle = getComputedStyle(textArea);
+            const lineHeight = parseFloat(computedStyle.lineHeight);
+            const paddingTop = parseFloat(computedStyle.paddingTop);
+
+            let insideBlock = false;
+            let blockStartIndex = -1;
+
+            lines.forEach((line, index) => {
+                if (line.trim() !== "") {
+                    // Add line copy icon for EACH line
+                    createCopyIcon(index, textAreaTop, lineHeight, paddingTop, line);
+
+                    // Detect start of block and add block icon only once per block
+                    if (!insideBlock) {
+                        insideBlock = true;
+                        blockStartIndex = index;
+                        createBlockIcon(index, textAreaTop, lineHeight, paddingTop);
+                    }
+                } else {
+                    insideBlock = false;
+                }
+            });
+        }
+
+        function createCopyIcon(lineIndex, textAreaTop, lineHeight, paddingTop, lineText) {
+            const lineIcon = document.createElement('i');
+            lineIcon.className = "ph ph-copy copy-icon";
+            lineIcon.style.top = `${textAreaTop + paddingTop + (lineIndex * lineHeight) - 3}px`;
+            lineIcon.onclick = () => copyLine(lineText, lineIcon);
+            document.querySelector('.container').appendChild(lineIcon);
+        }
+
+        function createBlockIcon(lineIndex, textAreaTop, lineHeight, paddingTop) {
+            const blockIcon = document.createElement('i');
+            blockIcon.className = blockIconClass;
+            blockIcon.style.top = `${textAreaTop + paddingTop + (lineIndex * lineHeight) - 3}px`;
+            blockIcon.onclick = () => copyBlock(lineIndex, blockIcon);
+            document.querySelector('.container').appendChild(blockIcon);
+        }
+
+        function copyLine(lineText, icon) {
+            navigator.clipboard.writeText(lineText);
+            showCopiedFeedback(icon);
+        }
+
+        function copyBlock(startIndex, icon) {
+            const textArea = document.getElementById('textbox');
+            const lines = textArea.value.split("\n");
+            let blockText = "";
+            for (let i = startIndex; i < lines.length; i++) {
+                if (lines[i].trim() === "") break;
+                blockText += lines[i] + "\n";
+            }
+
+            navigator.clipboard.writeText(blockText.replace(/\n/g, '\r\n'));
+            showCopiedFeedback(icon);
+        }
+
+        function showCopiedFeedback(icon) {
+            icon.classList.remove('ph-copy', 'ph-corners-out', 'ph-cube', 'ph-circles-four', 'ph-grid-four');
+            icon.classList.add('ph-check', 'copied');
+
+            setTimeout(() => {
+                icon.classList.remove('ph-check', 'copied');
+                if (icon.classList.contains('block-icon')) {
+                    icon.className = blockIconClass; // Restore block icon
+                } else {
+                    icon.className = 'ph ph-copy copy-icon'; // Restore line icon
+                }
+            }, 2000);
+        }
+
+        function copyAllText(icon) {
+            const textArea = document.getElementById('textbox');
+            navigator.clipboard.writeText(textArea.value.replace(/\n/g, '\r\n'));
+
+            icon.classList.remove('ph-copy');
+            icon.classList.add('ph-check', 'copied');
+
+            setTimeout(() => {
+                icon.classList.remove('ph-check', 'copied');
+                icon.classList.add('ph-copy');
+            }, 2000);
+        }
+
+        function clearText() {
+            const textArea = document.getElementById('textbox');
+            textArea.value = "";
+            textArea.focus();
+            updateIcons(); // Regenerate icons after clearing
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("textbox").focus();
+        });
+    </script>
+
+</body>
+
+</html>
